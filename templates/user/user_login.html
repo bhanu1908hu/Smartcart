@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Login - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* LOGIN CARD */
+.container{
+    width:100%;
+    max-width:460px;
+    padding:25px;
+    border-radius:24px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    color:#fff;
+}
+
+/* TOP LINKS */
+.top-links{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.top-links a{
+    text-decoration:none;
+    color:#dfff45;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:800;
+    font-size:13px;
+    border:1px solid rgba(223,255,69,.35);
+}
+
+.top-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* LOGO */
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.logo-icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 0 20px rgba(211,255,65,.35);
+}
+
+.logo h1{
+    font-size:34px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo h1 span{
+    color:#dfff45;
+}
+
+.logo p{
+    margin-top:8px;
+    color:#ccc;
+}
+
+/* TEXT */
+.heading{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+.heading h2{
+    font-size:26px;
+    margin-bottom:6px;
+    color:#fff;
+}
+
+.heading p{
+    color:#ccc;
+}
+
+/* FORM */
+.form-group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:800;
+    color:#dfff45;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:2px solid rgba(255,255,255,.12);
+    border-radius:12px;
+    font-size:15px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+}
+
+input::placeholder{
+    color:#aaa;
+}
+
+input:focus{
+    outline:none;
+    border-color:#dfff45;
+    box-shadow:0 0 12px rgba(223,255,69,.25);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    border:none;
+    padding:14px;
+    border-radius:25px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+button:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.5);
+}
+
+/* LINKS */
+.extra-links{
+    margin-top:18px;
+    text-align:center;
+}
+
+.extra-links p{
+    margin-bottom:8px;
+    color:#ccc;
+}
+
+.extra-links a{
+    color:#dfff45;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.extra-links a:hover{
+    text-decoration:underline;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .container{
+        max-width:420px;
+        padding:22px;
+    }
+
+    .logo h1{
+        font-size:30px;
+    }
+
+    .heading h2{
+        font-size:24px;
+    }
+}
+
+@media(max-width:480px){
+    body{
+        padding:10px;
+    }
+
+    .container{
+        width:100%;
+        border-radius:18px;
+        padding:20px;
+    }
+
+    .top-links{
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .logo h1{
+        font-size:26px;
+    }
+
+    .heading h2{
+        font-size:22px;
+    }
+
+    input{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-links">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+    <div class="logo">
+        <div class="logo-row">
+            <div class="logo-icon">🛍️</div>
+            <h1>Smart<span>Cart</span></h1>
+        </div>
+        <p>Your Smart Shopping Partner</p>
+    </div>
+
+    <div class="heading">
+        <h2>User Login</h2>
+        <p>Login to shop with SmartCart</p>
+    </div>
+
+    <form method="POST">
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <div class="extra-links">
+        <p>Do not have account? <a href="/user-register">Register</a></p>
+        <a href="/user/forgot-password">Forgot Password?</a>
+    </div>
+
+</div>
+
+</body>
+</html>

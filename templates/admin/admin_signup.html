@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Signup - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#050805;
+    padding:16px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:26px;
+    font-weight:800;
+    color:#fff;
+    text-align:left;
+}
+
+.nav-links{
+    display:flex;
+    gap:15px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    font-weight:700;
+    padding:8px 14px;
+    border-radius:20px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* CARD */
+.box{
+    width:100%;
+    max-width:450px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(223,255,69,.16), transparent 26%),
+      radial-gradient(circle at 15% 12%, rgba(223,255,69,.08), transparent 28%),
+      linear-gradient(180deg,#081300,#020302 78%);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* dots effect */
+.box::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.box > *{
+    position:relative;
+    z-index:2;
+}
+
+.box h2{
+    text-align:center;
+    color:#fff;
+    font-size:28px;
+    margin-bottom:10px;
+    font-weight:800;
+}
+
+.subtitle{
+    text-align:center;
+    color:#9d9d9d;
+    font-size:13px;
+    margin-bottom:24px;
+}
+
+/* FORM */
+label{
+    display:block;
+    margin-bottom:6px;
+    color:#e7e7e7;
+    font-weight:600;
+    font-size:13px;
+    text-align:left;
+}
+
+input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    font-size:14px;
+    margin-bottom:16px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+input::placeholder{
+    color:#6f6f6f;
+}
+
+input:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:15px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    border:none;
+    border-radius:25px;
+    color:#111;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* LOGIN LINK */
+.login-link{
+    text-align:center;
+    margin-top:18px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.login-link a{
+    color:#fff;
+    font-weight:800;
+    text-decoration:none;
+}
+
+.login-link a:hover{
+    color:#dfff45;
+}
+
+/* FLASH */
+.flash{
+    padding:10px;
+    border-radius:12px;
+    margin-bottom:12px;
+    text-align:center;
+    font-size:13px;
+    border:1px solid rgba(223,255,69,.25);
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .navbar{
+        padding:14px 5%;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .nav-links{
+        gap:10px;
+    }
+
+    .main{
+        padding:30px 15px;
+    }
+
+    .box{
+        padding:30px 24px;
+    }
+}
+
+@media(max-width:480px){
+    .navbar{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .box{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    .box h2{
+        font-size:24px;
+    }
+
+    input{
+        height:45px;
+        font-size:13px;
+    }
+
+    button{
+        padding:13px;
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">🛒 SmartCart</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/admin-login">Admin Login</a>
+    </div>
+</nav>
+
+<div class="main">
+
+    <div class="box">
+        <h2>Admin Registration</h2>
+        <p class="subtitle">Create your SmartCart admin account and verify using OTP.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/">
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Enter admin name" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Enter admin email" required>
+
+            <button type="submit">Send OTP</button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="/admin-login">Login here</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+    © 2026 SmartCart. All Rights Reserved.
+</footer>
+
+</body>
+</html>

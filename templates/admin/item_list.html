@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products List - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    color:#fff;
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#dfff45;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    color:#ccc;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.header h2{
+    font-size:24px;
+    color:#111;
+}
+
+/* ADD BUTTON */
+.add-btn{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    padding:8px 14px;
+    border-radius:20px;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* FILTER */
+.filter-box{
+    padding:18px;
+    border-radius:20px;
+    margin-bottom:20px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.filter-box form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+input,select{
+    padding:10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    flex:1;
+    min-width:180px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+}
+
+button{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    border:none;
+    padding:10px 15px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+/* TABLE */
+.table-card{
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    overflow:hidden;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:650px;
+}
+
+th{
+    background:#111;
+    padding:12px;
+    text-align:left;
+    font-size:14px;
+    color:#dfff45;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:14px;
+    color:#ddd;
+}
+
+tr:hover{
+    background:rgba(223,255,69,.05);
+}
+
+/* IMAGE */
+img{
+    width:60px;
+    border-radius:8px;
+}
+
+/* ACTION LINKS */
+td a{
+    color:#dfff45;
+    text-decoration:none;
+    font-size:13px;
+    margin-right:6px;
+}
+
+td a:hover{
+    text-decoration:underline;
+}
+
+/* FLASH */
+.flash{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#444;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    input,select,button{
+        width:100%;
+    }
+}
+
+@media(max-width:480px){
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    table{
+        min-width:500px;
+    }
+
+    img{
+        width:50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">Smart<span>Cart</span></div>
+
+    <div class="nav-links">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/orders">Orders</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="header">
+        <h2>📦 Product List</h2>
+        <a href="/admin/add-item" class="add-btn">+ Add Product</a>
+    </div>
+
+    <div class="filter-box">
+        <form method="GET" action="/admin/item-list">
+            <input type="text" name="search" placeholder="Search product...">
+            <select name="category">
+                <option value="">All Categories</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="table-card">
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.product_id }}</td>
+
+                    <td>
+                        <img src="/static/uploads/product_images/{{ product.image }}">
+                    </td>
+
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>₹{{ product.price }}</td>
+
+                    <td>
+                        <a href="/admin/view-item/{{ product.product_id }}">View</a> |
+                        <a href="/admin/update-item/{{ product.product_id }}">Update</a> |
+                        <a href="/admin/delete-item/{{ product.product_id }}"
+                           onclick="return confirm('Are you sure you want to delete this product?')">
+                           Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 SmartCart Admin Panel
+    </div>
+
+</div>
+
+</body>
+</html>

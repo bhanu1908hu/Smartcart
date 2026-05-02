@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* CARD */
+.card{
+    width:100%;
+    max-width:420px;
+    padding:35px 30px;
+    border-radius:32px;
+    text-align:center;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.card > *{
+    position:relative;
+    z-index:2;
+}
+
+/* ICON */
+.icon{
+    font-size:55px;
+    margin-bottom:12px;
+}
+
+/* TITLE */
+h2{
+    color:#dfff45;
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+/* DETAILS */
+.details{
+    background:rgba(0,0,0,.45);
+    border:1px solid rgba(255,255,255,.12);
+    padding:15px;
+    border-radius:14px;
+    margin-bottom:22px;
+    text-align:left;
+    font-size:14px;
+    color:#ddd;
+    word-break:break-word;
+}
+
+.details p{
+    margin:6px 0;
+}
+
+/* BUTTON */
+a.button{
+    display:inline-block;
+    width:100%;
+    padding:14px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:800;
+    transition:.3s;
+}
+
+a.button:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.6);
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .card{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    .icon{
+        font-size:45px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="icon">✅</div>
+
+    <h2>Payment Successful!</h2>
+
+    <div class="details">
+        <p><strong>Payment ID:</strong> {{ payment_id }}</p>
+        <p><strong>Order ID:</strong> {{ order_id }}</p>
+    </div>
+
+    <a href="/user/products" class="button">Continue Shopping</a>
+
+</div>
+
+</body>
+</html>

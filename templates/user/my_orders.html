@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:20px;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+    margin:auto;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:22px;
+    color:#111;
+    font-size:26px;
+    font-weight:800;
+}
+
+/* EMPTY STATE */
+.empty{
+    text-align:center;
+    padding:30px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+}
+
+.empty p{
+    color:#ddd;
+}
+
+.empty a{
+    display:inline-block;
+    margin-top:14px;
+    padding:12px 18px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:25px;
+    font-weight:800;
+}
+
+/* ORDERS GRID */
+.orders{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:18px;
+}
+
+/* ORDER CARD */
+.order-card{
+    padding:22px;
+    border-radius:24px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    position:relative;
+    overflow:hidden;
+}
+
+.order-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.order-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.order-card h3{
+    margin-bottom:12px;
+    color:#dfff45;
+    font-size:18px;
+}
+
+.order-info{
+    line-height:1.7;
+    font-size:14px;
+    color:#ddd;
+}
+
+.order-info strong{
+    color:#fff;
+}
+
+/* STATUS BADGE */
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    margin-top:5px;
+    font-weight:700;
+}
+
+/* BUTTONS */
+.btn-group{
+    margin-top:15px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.view-btn{
+    flex:1;
+    padding:10px 12px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:25px;
+    font-size:13px;
+    text-align:center;
+    font-weight:800;
+}
+
+.download{
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.view-btn:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.45);
+}
+
+.download:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    body{
+        padding:15px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    .btn-group{
+        flex-direction:column;
+    }
+
+    .view-btn{
+        width:100%;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>📦 My Orders</h2>
+
+    {% if orders|length == 0 %}
+
+        <div class="empty">
+            <p>You have not placed any orders yet.</p>
+            <a href="/user/products">Start Shopping</a>
+        </div>
+
+    {% else %}
+
+        <div class="orders">
+
+        {% for order in orders %}
+        <div class="order-card">
+
+            <h3>Order #{{ order.order_id }}</h3>
+
+            <div class="order-info">
+                <p><strong>Amount:</strong> ₹{{ order.amount }}</p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status">{{ order.payment_status }}</span>
+                </p>
+
+                <p><strong>Date:</strong> {{ order.created_at }}</p>
+            </div>
+
+            <div class="btn-group">
+
+                <a href="/user/order-success/{{ order.order_id }}" class="view-btn">
+                    View Details
+                </a>
+
+                <a href="/user/download-invoice/{{ order.order_id }}" class="view-btn download">
+                    Invoice
+                </a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

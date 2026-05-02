@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Product</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* HEADER */
+.header{
+    margin:18px;
+    padding:16px 24px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    color:#dfff45;
+    letter-spacing:.5px;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:20px;
+    color:#fff;
+    font-weight:700;
+    font-size:14px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.18);
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#111;
+    background:#dfff45;
+    box-shadow:0 0 18px rgba(223,255,69,.55);
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px;
+}
+
+/* CARD */
+.container{
+    width:100%;
+    max-width:540px;
+    padding:34px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(223,255,69,.16), transparent 26%),
+      radial-gradient(circle at 15% 12%, rgba(223,255,69,.08), transparent 28%),
+      linear-gradient(180deg,#081300,#020302 78%);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *{
+    position:relative;
+    z-index:2;
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:22px;
+    color:#fff;
+    font-size:26px;
+    font-weight:900;
+}
+
+/* LABEL */
+label{
+    display:block;
+    color:#e7e7e7;
+    font-weight:700;
+    font-size:13px;
+    margin-top:12px;
+    margin-bottom:6px;
+}
+
+/* INPUT */
+input, textarea{
+    width:100%;
+    padding:13px 14px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    font-size:14px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#777;
+}
+
+input:focus,
+textarea:focus{
+    border-color:rgba(223,255,69,.65);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+textarea{
+    resize:none;
+    height:95px;
+}
+
+input[type="file"]{
+    padding:10px;
+    color:#aaa;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:15px;
+    margin-top:22px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    border:none;
+    border-radius:25px;
+    color:#111;
+    font-weight:900;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 28px rgba(211,255,65,.7);
+}
+
+/* FLASH */
+.flash{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    padding:11px;
+    border-radius:13px;
+    text-align:center;
+    margin-bottom:14px;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* FOOTER */
+.footer{
+    margin:18px;
+    padding:13px;
+    border-radius:24px;
+    text-align:center;
+    color:#dfff45;
+    background:linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 14px 35px rgba(0,0,0,.3);
+    font-size:13px;
+    font-weight:700;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .header{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .nav-links{
+        justify-content:center;
+    }
+
+    .container{
+        padding:28px 22px;
+    }
+}
+
+@media(max-width:480px){
+    .header{
+        margin:12px;
+        border-radius:24px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    .nav-links a{
+        flex:1 1 100%;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">SmartCart</div>
+
+    <div class="nav-links">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="container">
+
+<h2>➕ Add New Product</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <p class="flash">{{ message }}</p>
+  {% endfor %}
+{% endwith %}
+
+<form method="POST" enctype="multipart/form-data">
+
+    <label>Product Name</label>
+    <input type="text" name="name" placeholder="Enter product name" required>
+
+    <label>Description</label>
+    <textarea name="description" placeholder="Enter description" required></textarea>
+
+    <label>Category</label>
+    <input type="text" name="category" placeholder="Electronics, Fashion..." required>
+
+    <label>Price</label>
+    <input type="number" name="price" step="0.01" placeholder="Enter price" required>
+
+    <label>Image</label>
+    <input type="file" name="image" accept="image/*" required>
+
+    <button type="submit">Add Product</button>
+</form>
+
+</div>
+
+</div>
+
+<div class="footer">
+    © 2025 SmartCart Admin Panel
+</div>
+
+</body>
+</html>

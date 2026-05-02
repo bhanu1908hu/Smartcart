@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Orders - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* LOGO */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(223,255,69,.12);
+    border:1px solid rgba(223,255,69,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.logo h1{
+    font-size:22px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#dfff45;
+}
+
+/* NAV */
+.nav-links{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.container{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+/* HEADER CARD */
+.header-card{
+    padding:24px;
+    border-radius:24px;
+    margin-bottom:18px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.header-card::before,
+.table-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.header-card > *,
+.table-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.header-card h2{
+    font-size:24px;
+    margin-bottom:5px;
+    color:#fff;
+}
+
+.header-card p{
+    color:#aaa;
+}
+
+/* STATS */
+.stats{
+    margin-top:15px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:12px;
+}
+
+.stat-box{
+    background:rgba(0,0,0,.45);
+    padding:15px;
+    border-radius:16px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.stat-box h4{
+    font-size:12px;
+    color:#aaa;
+}
+
+.stat-box p{
+    font-size:20px;
+    font-weight:800;
+    color:#dfff45;
+}
+
+/* TABLE CARD */
+.table-card{
+    border-radius:24px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+}
+
+/* SCROLL */
+.table-wrap{
+    overflow-x:auto;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+th{
+    background:#111;
+    padding:12px;
+    text-align:left;
+    font-size:13px;
+    color:#dfff45;
+    position:sticky;
+    top:0;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:13px;
+    color:#ddd;
+}
+
+tr:hover{
+    background:rgba(223,255,69,.05);
+}
+
+/* BADGES */
+.badge{
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.payment,
+.status{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+}
+
+/* BUTTON */
+.btn{
+    padding:7px 12px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.btn:hover{
+    box-shadow:0 0 18px rgba(211,255,65,.55);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:18px;
+    color:#444;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        flex:1 1 45%;
+        text-align:center;
+    }
+
+    .header-card h2{
+        font-size:20px;
+    }
+
+    table{
+        min-width:700px;
+    }
+}
+
+@media(max-width:480px){
+    .nav-links a{
+        flex:1 1 100%;
+    }
+
+    .logo h1{
+        font-size:20px;
+    }
+
+    .stat-box p{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">🛍️</div>
+        <h1>Smart<span>Cart</span></h1>
+    </div>
+
+    <div class="nav-links">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/add-item">Add Product</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin/profile">Profile</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <div class="header-card">
+        <h2>📦 All Customer Orders</h2>
+        <p>Track orders, payments and delivery status in real time</p>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h4>Total Orders</h4>
+                <p>{{ orders|length }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>Status</h4>
+                <p>Live</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>Platform</h4>
+                <p>SmartCart</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div class="table-wrap">
+
+            <table>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>View</th>
+                </tr>
+
+                {% for order in orders %}
+                <tr>
+                    <td><strong>#{{ order.order_id }}</strong></td>
+                    <td>{{ order.username }}</td>
+                    <td><strong>₹{{ order.amount }}</strong></td>
+                    <td><span class="badge payment">{{ order.payment_status }}</span></td>
+                    <td><span class="badge status">{{ order.order_status }}</span></td>
+                    <td>{{ order.created_at }}</td>
+                    <td>
+                        <a class="btn" href="/admin/order/{{ order.order_id }}">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 SmartCart Admin Panel
+    </div>
+
+</div>
+
+</body>
+</html>

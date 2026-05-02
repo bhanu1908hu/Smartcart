@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* PROFILE CARD */
+.profile-card{
+    width:100%;
+    max-width:400px;
+    padding:30px;
+    border-radius:30px;
+    text-align:center;
+
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.profile-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+}
+
+.profile-card > *{
+    position:relative;
+    z-index:2;
+}
+
+/* PROFILE IMAGE */
+.profile-card img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:10px;
+    border:2px solid #dfff45;
+}
+
+/* DEFAULT AVATAR */
+.default-avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#dfff45;
+    color:#111;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+    font-weight:bold;
+    margin:0 auto 10px;
+}
+
+/* TITLE */
+.profile-card h3{
+    margin-bottom:15px;
+    color:#fff;
+}
+
+/* INPUT */
+.profile-card input{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(0,0,0,.4);
+    color:#fff;
+    outline:none;
+}
+
+.profile-card input::placeholder{
+    color:#aaa;
+}
+
+.profile-card input:focus{
+    border-color:#dfff45;
+    box-shadow:0 0 10px rgba(223,255,69,.3);
+}
+
+/* BUTTON */
+.profile-card button{
+    margin-top:16px;
+    padding:12px;
+    width:100%;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:800;
+}
+
+.profile-card button:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.5);
+}
+
+/* FLASH */
+.flash{
+    margin-bottom:10px;
+    padding:10px;
+    border-radius:10px;
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    font-size:13px;
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .profile-card{
+        padding:25px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="nav-links">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/profile">Profile</a>
+        <a href="/user-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="profile-card">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if user.profile_image %}
+    <img src="{{ url_for('static', filename='uploads/user_profiles/' + user.profile_image) }}">
+{% else %}
+    <div class="default-avatar">
+        {{ user.name[0]|upper }}
+    </div>
+{% endif %}
+
+<h3>{{ user.name }}</h3>
+
+<form method="POST" action="/user/profile" enctype="multipart/form-data">
+
+    <input type="text" name="name" value="{{ user.name }}" required>
+
+    <input type="email" name="email" value="{{ user.email }}" required>
+
+    <input type="password" name="password" placeholder="New Password">
+
+    <input type="file" name="profile_image" accept="image/*">
+
+    <button type="submit">Update Profile</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="footer">
+    © 2026 SmartCart
+</div>
+
+</body>
+</html>

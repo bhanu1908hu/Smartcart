@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order #{{ order.order_id }} - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:white;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(223,255,69,.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    border:1px solid rgba(223,255,69,.25);
+}
+
+.logo h1{
+    font-size:24px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#dfff45;
+}
+
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 15px;
+}
+
+/* CARD */
+.card{
+    border-radius:24px;
+    padding:25px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.card > *{
+    position:relative;
+    z-index:2;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.header h2{
+    font-size:24px;
+    color:#fff;
+}
+
+/* STATUS */
+.status-badge{
+    padding:7px 15px;
+    border-radius:20px;
+    font-weight:800;
+    font-size:13px;
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+/* INFO BOX */
+.info-box{
+    background:rgba(0,0,0,.45);
+    padding:15px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+.info-box h4{
+    font-size:13px;
+    color:#aaa;
+    margin-bottom:6px;
+}
+
+.info-box p{
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+}
+
+/* SECTION */
+.section-title{
+    margin:22px 0 12px;
+    font-size:20px;
+    color:#dfff45;
+}
+
+/* FORM */
+.form-box{
+    background:rgba(0,0,0,.45);
+    padding:15px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.12);
+}
+
+form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+select{
+    flex:1;
+    min-width:180px;
+    height:45px;
+    padding:0 12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    background:#050805;
+    color:#fff;
+    outline:none;
+}
+
+select:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+button{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    border:none;
+    padding:0 22px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:800;
+    height:45px;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* TABLE */
+.table-card{
+    margin-top:10px;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(0,0,0,.35);
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:500px;
+}
+
+th{
+    background:#111;
+    padding:12px;
+    text-align:left;
+    font-size:13px;
+    color:#dfff45;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    color:#ddd;
+}
+
+tr:hover{
+    background:rgba(223,255,69,.05);
+}
+
+/* BACK */
+.back{
+    text-align:center;
+    margin-top:22px;
+}
+
+.back a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.back a:hover{
+    color:#dfff45;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#444;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        flex:1 1 45%;
+        text-align:center;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .header h2{
+        font-size:20px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    form{
+        flex-direction:column;
+    }
+
+    button{
+        width:100%;
+    }
+}
+
+@media(max-width:480px){
+    .nav-links a{
+        flex:1 1 100%;
+    }
+
+    .logo h1{
+        font-size:20px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    table{
+        min-width:450px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <div class="logo-icon">🛍️</div>
+        <h1>Smart<span>Cart</span></h1>
+    </div>
+
+    <div class="nav-links">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/orders">Orders</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+<div class="card">
+
+    <div class="header">
+        <h2>Order #{{ order.order_id }}</h2>
+        <span class="status-badge">{{ order.order_status }}</span>
+    </div>
+
+    <h3 class="section-title">Customer Details</h3>
+    <div class="grid">
+        <div class="info-box"><h4>Name</h4><p>{{ order.user_name }}</p></div>
+        <div class="info-box"><h4>Email</h4><p>{{ order.user_email }}</p></div>
+        <div class="info-box"><h4>Phone</h4><p>{{ order.phone }}</p></div>
+        <div class="info-box"><h4>Address</h4><p>{{ order.address }}</p></div>
+    </div>
+
+    <h3 class="section-title">Order Summary</h3>
+    <div class="grid">
+        <div class="info-box"><h4>Payment</h4><p>{{ order.payment_status }}</p></div>
+        <div class="info-box"><h4>Total</h4><p>₹{{ order.amount }}</p></div>
+        <div class="info-box"><h4>Date</h4><p>{{ order.created_at }}</p></div>
+        <div class="info-box"><h4>Status</h4><p>{{ order.order_status }}</p></div>
+    </div>
+
+    <h3 class="section-title">Update Status</h3>
+    <div class="form-box">
+        <form method="POST" action="/admin/update-order-status/{{ order.order_id }}">
+            <select name="status">
+                <option>Pending</option>
+                <option>Confirmed</option>
+                <option>Packed</option>
+                <option>Shipped</option>
+                <option>Delivered</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <h3 class="section-title">Items</h3>
+    <div class="table-card">
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+
+                {% for it in items %}
+                <tr>
+                    <td>{{ it.product_name }}</td>
+                    <td>{{ it.quantity }}</td>
+                    <td>₹{{ it.price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="back">
+        <a href="/admin/orders">← Back to Orders</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    © 2026 SmartCart Admin Panel
+</div>
+
+</div>
+
+</body>
+</html>

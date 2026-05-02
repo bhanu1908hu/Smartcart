@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* HEADER */
+.header{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+/* NAV */
+.nav-links{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 20px;
+}
+
+/* CARD */
+.container{
+    width:100%;
+    max-width:850px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *{
+    position:relative;
+    z-index:2;
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#fff;
+    font-size:26px;
+    font-weight:800;
+}
+
+/* LAYOUT */
+.product-wrapper{
+    display:flex;
+    gap:28px;
+    align-items:center;
+}
+
+/* IMAGE */
+.product-img{
+    width:100%;
+    max-width:300px;
+    border-radius:20px;
+    object-fit:contain;
+    border:3px solid #dfff45;
+    box-shadow:0 0 22px rgba(223,255,69,.35);
+    background:rgba(0,0,0,.35);
+    padding:10px;
+}
+
+/* DETAILS */
+.details{
+    flex:1;
+}
+
+.details p{
+    margin:12px 0;
+    font-size:15px;
+    color:#ddd;
+    line-height:1.6;
+}
+
+.details strong{
+    color:#dfff45;
+}
+
+/* PRICE */
+.price{
+    font-size:28px !important;
+    font-weight:800;
+    color:#dfff45 !important;
+    margin-top:14px;
+}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 18px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .product-wrapper{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .details{
+        width:100%;
+    }
+
+    .product-img{
+        max-width:220px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">SmartCart Admin</div>
+
+    <div class="nav-links">
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="container">
+
+<h2>Product Details</h2>
+
+<div class="product-wrapper">
+
+    <div>
+        <img src="/static/uploads/product_images/{{ product.image }}" class="product-img">
+    </div>
+
+    <div class="details">
+
+        <p><strong>Name:</strong> {{ product.name }}</p>
+
+        <p><strong>Description:</strong> {{ product.description }}</p>
+
+        <p><strong>Category:</strong> {{ product.category }}</p>
+
+        <p class="price">₹{{ product.price }}</p>
+
+        <a href="/admin/item-list" class="btn">Back to Products</a>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+    © 2025 SmartCart Admin Panel
+</div>
+
+</body>
+</html>

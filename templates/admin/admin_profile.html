@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Profile - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 30px;
+    color:white;
+    background:#050805;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#dfff45;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    color:#ccc;
+    font-weight:600;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+.logout{
+    background:#ff4d4d !important;
+    color:#fff !important;
+}
+
+.logout:hover{
+    background:#ff0000 !important;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px 20px;
+}
+
+/* CARD */
+.container{
+    width:100%;
+    max-width:420px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(223,255,69,.16), transparent 26%),
+      radial-gradient(circle at 15% 12%, rgba(223,255,69,.08), transparent 28%),
+      linear-gradient(180deg,#081300,#020302 78%);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *{
+    position:relative;
+    z-index:2;
+}
+
+/* TITLE */
+h2{
+    margin-bottom:18px;
+    color:#fff;
+    font-size:25px;
+    font-weight:800;
+}
+
+/* PROFILE IMAGE */
+.profile-wrapper{
+    margin-bottom:18px;
+}
+
+.profile-img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #dfff45;
+    box-shadow:0 0 22px rgba(223,255,69,.45);
+}
+
+.no-img{
+    color:#aaa;
+    font-size:14px;
+}
+
+/* FORM */
+.form-group{
+    text-align:left;
+    margin-top:14px;
+}
+
+label{
+    color:#e7e7e7;
+    font-weight:600;
+    font-size:13px;
+}
+
+input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    margin-top:7px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    font-size:14px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+input::placeholder{
+    color:#6f6f6f;
+}
+
+input:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+input[type="file"]{
+    padding:12px;
+    height:auto;
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:15px;
+    margin-top:24px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    border:none;
+    border-radius:25px;
+    color:#111;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* BACK */
+.back{
+    display:block;
+    margin-top:18px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:800;
+    font-size:13px;
+}
+
+.back:hover{
+    color:#dfff45;
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        flex:1 1 45%;
+        text-align:center;
+    }
+}
+
+@media(max-width:480px){
+    .container{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    .nav-links a{
+        flex:1 1 100%;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    .profile-img{
+        width:100px;
+        height:100px;
+    }
+
+    input{
+        height:45px;
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">Smart<span>Cart</span> Admin</div>
+
+    <div class="nav-links">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout" class="logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="container">
+
+<h2>👤 Admin Profile</h2>
+
+<div class="profile-wrapper">
+{% if admin.profile_image %}
+    <img src="/static/uploads/admin_profiles/{{ admin.profile_image }}" class="profile-img">
+{% else %}
+    <p class="no-img">No Profile Image</p>
+{% endif %}
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" value="{{ admin.name }}">
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" value="{{ admin.email }}">
+    </div>
+
+    <div class="form-group">
+        <label>New Password</label>
+        <input type="password" name="password">
+    </div>
+
+    <div class="form-group">
+        <label>Profile Image</label>
+        <input type="file" name="profile_image">
+    </div>
+
+    <button type="submit">Update Profile</button>
+</form>
+
+<a href="/admin-dashboard" class="back">← Back</a>
+
+</div>
+
+</div>
+
+<div class="footer">
+    © 2026 SmartCart Admin Panel
+</div>
+
+</body>
+</html>

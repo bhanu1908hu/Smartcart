@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:700;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    padding:20px;
+}
+
+/* HERO */
+.hero{
+    padding:18px;
+    border-radius:24px;
+    text-align:center;
+    margin-bottom:18px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.hero h2,
+.hero h3{
+    color:#fff;
+}
+
+.hero a{
+    display:inline-block;
+    margin-top:12px;
+    color:#111;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    padding:10px 16px;
+    border-radius:20px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+/* FLASH */
+.flash{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* TABLE CARD */
+.table-card{
+    padding:10px;
+    border-radius:24px;
+    overflow-x:auto;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:14px;
+    color:#ddd;
+}
+
+th{
+    background:#111;
+    color:#dfff45;
+}
+
+tr:hover{
+    background:rgba(223,255,69,.05);
+}
+
+img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    border-radius:8px;
+    background:rgba(255,255,255,.08);
+}
+
+/* CHECKBOX */
+.item-check{
+    width:18px;
+    height:18px;
+    accent-color:#dfff45;
+}
+
+/* QTY */
+.qty-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+}
+
+.qty-btn{
+    width:30px;
+    height:30px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.minus{
+    background:#ef4444;
+}
+
+.plus{
+    background:#22c55e;
+}
+
+.qty-number{
+    font-weight:800;
+    color:#fff;
+    min-width:20px;
+}
+
+/* REMOVE */
+.remove{
+    background:#ef4444;
+    color:white;
+    padding:7px 10px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* CART FOOTER */
+.cart-footer{
+    margin-top:18px;
+    padding:18px;
+    border-radius:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    font-weight:800;
+}
+
+#selectedTotal{
+    color:#dfff45;
+}
+
+.checkout{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    padding:12px 18px;
+    color:#111;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:14px;
+    text-decoration:none;
+    font-weight:800;
+}
+
+.checkout:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.5);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .cart-footer{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="nav-links">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+    <h2>Your Cart</h2>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% if not cart %}
+    <div class="hero">
+        <h3>Cart is empty</h3>
+        <a href="/user/products">Shop Now</a>
+    </div>
+{% else %}
+
+<form method="POST" action="/checkout-selected">
+
+<div class="table-card">
+
+<table>
+
+<tr>
+    <th>Select</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Total</th>
+    <th>Action</th>
+</tr>
+
+{% for pid,item in cart.items() %}
+<tr>
+
+<td>
+    <input type="checkbox"
+           class="item-check"
+           name="selected_products"
+           value="{{ pid }}"
+           data-price="{{ item.price }}"
+           data-qty="{{ item.quantity }}">
+</td>
+
+<td>
+    <img src="/static/uploads/product_images/{{ item.image }}">
+</td>
+
+<td>{{ item.name }}</td>
+
+<td>₹{{ item.price }}</td>
+
+<td>
+    <div class="qty-box">
+        <a href="/user/cart/decrease/{{ pid }}" class="qty-btn minus">-</a>
+
+        <span class="qty-number">{{ item.quantity }}</span>
+
+        <a href="/user/cart/increase/{{ pid }}" class="qty-btn plus">+</a>
+    </div>
+</td>
+
+<td>₹{{ item.price * item.quantity }}</td>
+
+<td>
+    <a href="/user/cart/remove/{{ pid }}" class="remove">Remove</a>
+</td>
+
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+<div class="cart-footer">
+
+<div>
+    Selected Total: ₹<span id="selectedTotal">0</span>
+</div>
+
+<button type="submit" class="checkout">Checkout</button>
+
+</div>
+
+</form>
+
+{% endif %}
+
+</div>
+
+<script>
+let checkboxes = document.querySelectorAll(".item-check");
+let totalBox = document.getElementById("selectedTotal");
+
+function updateTotal(){
+    let total = 0;
+
+    checkboxes.forEach(cb=>{
+        if(cb.checked){
+            total += parseFloat(cb.dataset.price) * parseInt(cb.dataset.qty);
+        }
+    });
+
+    totalBox.innerText = total.toFixed(2);
+}
+
+checkboxes.forEach(cb=>{
+    cb.addEventListener("change", updateTotal);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* HEADER */
+.header{
+    background:#050805;
+    padding:16px 20px;
+    color:white;
+    font-size:22px;
+    font-weight:800;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+/* CARD */
+.container{
+    width:100%;
+    max-width:380px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *{
+    position:relative;
+    z-index:2;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#fff;
+    font-size:24px;
+    font-weight:800;
+}
+
+/* LABEL */
+label{
+    font-weight:600;
+    display:block;
+    margin-top:14px;
+    font-size:13px;
+    color:#e7e7e7;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    margin-top:7px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    font-size:14px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+input::placeholder{
+    color:#6f6f6f;
+}
+
+input:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:15px;
+    margin-top:22px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    border:none;
+    color:#111;
+    font-size:15px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:800;
+    transition:.3s;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* FLASH */
+.flash-message{
+    text-align:center;
+    margin-bottom:10px;
+    padding:10px;
+    border-radius:10px;
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    font-size:13px;
+    border:1px solid rgba(223,255,69,.25);
+}
+
+/* LINK */
+.login-link{
+    text-align:center;
+    display:block;
+    margin-top:16px;
+    text-decoration:none;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+}
+
+.login-link:hover{
+    color:#dfff45;
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .header{
+        text-align:center;
+        font-size:20px;
+    }
+
+    .container{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+    input{
+        height:45px;
+        font-size:13px;
+    }
+
+    button{
+        padding:13px;
+        font-size:14px;
+    }
+}
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+    SmartCart
+</div>
+
+<div class="main">
+    <div class="container">
+
+        <h2>Create Account</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <p class="flash-message">{{ message }}</p>
+          {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/user-register">
+
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <a href="/user-login" class="login-link">Already have an account? Login</a>
+
+    </div>
+</div>
+
+<div class="footer">
+    © 2025 SmartCart. All rights reserved.
+</div>
+
+</body>
+</html>

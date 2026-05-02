@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+/* 🔥 BODY WITH IMAGE */
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    color:#fff;
+    overflow-x:hidden;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1555529771-7888783a18d3?q=80&w=1470&auto=format&fit=crop");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#050805;
+    color:white;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:800;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    color:#ccc;
+    font-size:14px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:30px 20px;
+}
+
+/* FLASH */
+.flash-msg p{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    padding:10px 18px;
+    border-radius:12px;
+    margin-bottom:20px;
+    font-size:13px;
+    text-align:center;
+}
+
+/* WELCOME CARD */
+.container{
+    width:100%;
+    max-width:600px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    text-align:center;
+    margin-bottom:30px;
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before,
+.product-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *,
+.product-card > *{
+    position:relative;
+    z-index:2;
+}
+
+h2{
+    font-size:34px;
+    font-weight:800;
+}
+
+/* PRODUCT GRID */
+.product-grid{
+    width:100%;
+    max-width:1000px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:20px;
+}
+
+/* PRODUCT CARD */
+.product-card{
+    border-radius:24px;
+    padding:24px;
+    text-align:center;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.product-card:hover{
+    box-shadow:0 0 25px rgba(211,255,65,.3);
+}
+
+.product-card h3{
+    font-size:18px;
+    margin-bottom:12px;
+    color:#dfff45;
+}
+
+.product-card a{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 16px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    text-decoration:none;
+    border-radius:25px;
+    font-size:14px;
+    font-weight:800;
+}
+
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .container{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="nav-links">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/profile">Profile</a>
+        <a href="/user-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <div class="flash-msg">
+        <p>{{ message }}</p>
+    </div>
+  {% endfor %}
+{% endwith %}
+
+<div class="container">
+    <h2>Welcome, {{ user_name }}!</h2>
+</div>
+
+<div class="product-grid">
+
+{% for product in products %}
+<div class="product-card">
+    <h3>{{ product.name }}</h3>
+
+    <a href="/user/add-to-cart/{{ product.product_id }}">
+        Add to Cart
+    </a>
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+<div class="footer">
+    © 2025 SmartCart. All rights reserved.
+</div>
+
+</body>
+</html>

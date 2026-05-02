@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Address</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.navbar h2{
+    font-size:20px;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* WRAPPER */
+.wrapper{
+    padding:25px;
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+}
+
+/* 🔥 FLASH MESSAGES */
+.flash{
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:15px;
+    font-weight:600;
+    font-size:14px;
+}
+
+/* SUCCESS */
+.flash.success{
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #22c55e;
+}
+
+/* ERROR */
+.flash.danger,
+.flash.error{
+    background:#fee2e2;
+    color:#991b1b;
+    border:1px solid #ef4444;
+}
+
+/* WARNING */
+.flash.warning{
+    background:#fef3c7;
+    color:#92400e;
+    border:1px solid #f59e0b;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    padding:20px;
+    border-radius:24px;
+
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+/* TITLE */
+.card h3{
+    margin-bottom:12px;
+}
+
+/* INPUT */
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(0,0,0,.4);
+    color:#fff;
+    outline:none;
+}
+
+textarea{
+    height:90px;
+}
+
+input:focus, textarea:focus{
+    border-color:#dfff45;
+    box-shadow:0 0 10px rgba(223,255,69,.3);
+}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    padding:10px 14px;
+    margin-top:12px;
+    border-radius:20px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    font-weight:700;
+}
+
+/* BUTTON COLORS */
+.primary{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+}
+
+.success{
+    background:green;
+}
+
+.warning{
+    background:orange;
+}
+
+.danger{
+    background:red;
+}
+
+/* ADDRESS BOX */
+.address-box{
+    border:1px solid rgba(255,255,255,.1);
+    padding:14px;
+    margin-top:12px;
+    border-radius:12px;
+    background:rgba(0,0,0,.4);
+}
+
+.address-box h4{
+    color:#dfff45;
+}
+
+/* ACTIONS */
+.actions{
+    margin-top:10px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>Delivery Address</h2>
+    <a href="/user/cart">Back to Cart</a>
+</div>
+
+<div class="wrapper">
+<div class="container">
+
+<!-- ✅ FLASH WITH CATEGORY -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="grid">
+
+<!-- ADD ADDRESS -->
+<div class="card">
+    <h3>Add New Address</h3>
+
+    <form method="POST" action="/add-address">
+        <input type="text" name="full_name" placeholder="Full Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <textarea name="address" placeholder="Full Address" required></textarea>
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="state" placeholder="State" required>
+        <input type="text" name="pincode" placeholder="Pincode" required>
+
+        <button type="submit" class="btn primary">Save Address</button>
+    </form>
+</div>
+
+<!-- SAVED ADDRESSES -->
+<div class="card">
+    <h3>Saved Addresses</h3>
+
+    {% if addresses %}
+
+        {% for addr in addresses %}
+        <div class="address-box">
+
+            <h4>{{ addr.full_name }}</h4>
+
+            <p><b>Phone:</b> {{ addr.phone }}</p>
+
+            <p>
+                {{ addr.address }},
+                {{ addr.city }},
+                {{ addr.state }} -
+                {{ addr.pincode }}
+            </p>
+
+            <div class="actions">
+
+                <a href="/continue-payment/{{ addr.id }}" class="btn success">
+                    Use & Pay
+                </a>
+
+                <a href="/edit-address/{{ addr.id }}" class="btn warning">
+                    Edit
+                </a>
+
+                <a href="/delete-address/{{ addr.id }}" class="btn danger">
+                    Delete
+                </a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    {% else %}
+        <p>No address added yet</p>
+    {% endif %}
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

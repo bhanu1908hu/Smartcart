@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Product</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* HEADER */
+.header{
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    flex-wrap:wrap;
+    gap:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+}
+
+/* NAV */
+.nav-links{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px 20px;
+}
+
+/* CARD */
+.container{
+    width:100%;
+    max-width:600px;
+    padding:35px 30px;
+    border-radius:32px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.container > *{
+    position:relative;
+    z-index:2;
+}
+
+/* TITLE */
+h2{
+    text-align:center;
+    margin-bottom:18px;
+    color:#fff;
+    font-size:26px;
+    font-weight:800;
+}
+
+/* FLASH */
+.flash{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    padding:10px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:12px;
+    font-size:13px;
+}
+
+/* LABEL */
+label{
+    display:block;
+    font-weight:600;
+    font-size:13px;
+    color:#e7e7e7;
+    margin-top:12px;
+}
+
+/* INPUT */
+input, textarea{
+    width:100%;
+    padding:12px 14px;
+    margin-top:7px;
+    margin-bottom:12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    outline:none;
+    font-size:14px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#6f6f6f;
+}
+
+input:focus, textarea:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+textarea{
+    resize:none;
+    height:90px;
+}
+
+input[type="file"]{
+    height:auto;
+}
+
+/* IMAGE */
+.preview-img{
+    display:block;
+    margin:10px auto 15px auto;
+    width:130px;
+    height:130px;
+    border-radius:16px;
+    border:3px solid #dfff45;
+    object-fit:cover;
+    box-shadow:0 0 22px rgba(223,255,69,.35);
+}
+
+/* BUTTON */
+button{
+    width:100%;
+    padding:15px;
+    margin-top:12px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    border:none;
+    border-radius:25px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    box-shadow:0 0 20px rgba(211,255,65,.25);
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+/* BACK LINK */
+.back-link{
+    display:block;
+    text-align:center;
+    margin-top:18px;
+    text-decoration:none;
+    color:#fff;
+    font-size:13px;
+    font-weight:800;
+}
+
+.back-link:hover{
+    color:#dfff45;
+}
+
+/* MOBILE */
+@media(max-width:500px){
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .container{
+        padding:25px 20px;
+        border-radius:28px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    input, textarea, button{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">SmartCart Admin</div>
+
+    <div class="nav-links">
+        <a href="/admin/dashboard">Dashboard</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+</div>
+
+<div class="main">
+
+<div class="container">
+
+<h2>Update Product</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    <p class="flash">{{ message }}</p>
+  {% endfor %}
+{% endwith %}
+
+<form method="POST" action="/admin/update-item/{{ product.product_id }}" enctype="multipart/form-data">
+
+    <label>Product Name</label>
+    <input type="text" name="name" value="{{ product.name }}" required>
+
+    <label>Description</label>
+    <textarea name="description" required>{{ product.description }}</textarea>
+
+    <label>Category</label>
+    <input type="text" name="category" value="{{ product.category }}" required>
+
+    <label>Price</label>
+    <input type="number" step="0.01" name="price" value="{{ product.price }}" required>
+
+    <label>Current Image</label>
+    <img src="/static/uploads/product_images/{{ product.image }}" class="preview-img">
+
+    <label>Upload New Image (Optional)</label>
+    <input type="file" name="image" accept="image/*">
+
+    <button type="submit">Update Product</button>
+
+</form>
+
+<a href="/admin/item-list" class="back-link">← Back to Product List</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

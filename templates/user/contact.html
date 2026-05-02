@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* HEADER */
+.header{
+    background:#050805;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.top-bar{
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.logo-text{
+    font-size:28px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo-text span{
+    color:#dfff45;
+}
+
+/* NAV */
+.nav-menu{
+    display:flex;
+    gap:10px;
+}
+
+.nav-menu a{
+    text-decoration:none;
+    color:#ccc;
+    font-weight:800;
+    padding:8px 14px;
+    border-radius:20px;
+}
+
+.nav-menu a:hover,
+.nav-menu .active{
+    background:#dfff45;
+    color:#111;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    color:#dfff45;
+    cursor:pointer;
+}
+
+/* PAGE */
+.page{
+    padding:35px 16px;
+}
+
+.contact-card{
+    max-width:700px;
+    margin:auto;
+    padding:32px;
+    border-radius:30px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 25px 55px rgba(0,0,0,.45);
+    position:relative;
+    overflow:hidden;
+}
+
+.contact-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
+    background-size:9px 9px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.contact-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.contact-card h1{
+    font-size:32px;
+    margin-bottom:8px;
+    color:#dfff45;
+}
+
+.contact-card p{
+    color:#aaa;
+    margin-bottom:24px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:800;
+    color:#e7e7e7;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    font-size:15px;
+    background:rgba(0,0,0,.45);
+    color:#fff;
+    outline:none;
+    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
+}
+
+textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus{
+    border-color:rgba(223,255,69,.6);
+    box-shadow:0 0 14px rgba(223,255,69,.25);
+}
+
+button{
+    width:100%;
+    border:none;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    color:#111;
+    padding:15px;
+    border-radius:25px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+button:hover{
+    box-shadow:0 0 25px rgba(211,255,65,.65);
+}
+
+.flash p{
+    background:#dcfce7;
+    color:#166534;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:16px;
+    font-weight:700;
+    border:1px solid #22c55e;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:30px;
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:16px;
+    font-weight:700;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-menu{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        margin-top:10px;
+        background:rgba(255,255,255,.08);
+        padding:10px;
+        border-radius:16px;
+    }
+
+    .nav-menu.show{
+        display:flex;
+    }
+
+    .nav-menu a{
+        width:100%;
+        text-align:center;
+    }
+
+    .logo-text{
+        font-size:24px;
+    }
+
+    .contact-card h1{
+        font-size:26px;
+    }
+}
+
+@media(max-width:480px){
+    .contact-card{
+        padding:24px 20px;
+        border-radius:26px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="top-bar">
+
+        <div class="brand">
+            <div class="logo-icon">🛍️</div>
+            <div class="logo-text">Smart<span>Cart</span></div>
+        </div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="/user-login">Login</a>
+            <a href="/about">About</a>
+            <a href="/contact" class="active">Contact</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="page">
+
+<div class="contact-card">
+
+    <h1>Contact Us</h1>
+    <p>Send your queries, issues, or feedback to SmartCart.</p>
+
+    <div class="flash">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endwith %}
+    </div>
+
+    <form method="POST">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Your Message</label>
+            <textarea name="message" required></textarea>
+        </div>
+
+        <button type="submit">Send Message</button>
+
+    </form>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 SmartCart  . All Rights Reserved
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navMenu").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>
