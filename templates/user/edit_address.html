@@ -13,16 +13,81 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+    flex-direction:column;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
 }
 
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#dfff45;
+    font-size:24px;
+    font-weight:900;
+}
+
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:24px 16px;
+}
+
+/* WRAPPER */
 .address-wrapper{
     width:100%;
     display:flex;
@@ -30,9 +95,10 @@ body{
     align-items:center;
 }
 
+/* CARD */
 .address-card{
     width:100%;
-    max-width:420px;
+    max-width:460px;
     padding:35px 30px;
     border-radius:32px;
     background:
@@ -58,50 +124,55 @@ body{
     z-index:2;
 }
 
+/* TITLE */
 .address-card h3{
     text-align:center;
-    margin-bottom:18px;
-    color:#fff;
-    font-size:24px;
-    font-weight:800;
+    margin-bottom:20px;
+    color:#dfff45;
+    font-size:clamp(21px,5vw,26px);
+    font-weight:900;
 }
 
+/* INPUTS */
 .address-card input,
 .address-card textarea{
     width:100%;
-    padding:12px 14px;
-    margin-top:10px;
-    border-radius:12px;
+    padding:13px 15px;
+    margin-top:12px;
+    border-radius:14px;
     border:1px solid rgba(255,255,255,.18);
     font-size:14px;
     background:rgba(0,0,0,.45);
     color:#fff;
     outline:none;
+    transition:.3s ease;
     box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
 .address-card input::placeholder,
 .address-card textarea::placeholder{
-    color:#6f6f6f;
+    color:#9ca3af;
 }
 
 .address-card textarea{
-    resize:none;
-    height:90px;
+    resize:vertical;
+    min-height:100px;
 }
 
 .address-card input:focus,
 .address-card textarea:focus{
-    border-color:rgba(223,255,69,.6);
+    border-color:rgba(223,255,69,.7);
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
+/* ACTION BUTTONS */
 .actions{
-    margin-top:22px;
+    margin-top:24px;
     display:flex;
-    gap:10px;
+    gap:12px;
 }
 
+/* BUTTON */
 .btn{
     flex:1;
     text-align:center;
@@ -111,8 +182,8 @@ body{
     border:none;
     cursor:pointer;
     font-size:14px;
-    font-weight:800;
-    transition:.3s;
+    font-weight:900;
+    transition:.3s ease;
 }
 
 .btn-primary{
@@ -136,14 +207,75 @@ body{
     color:#111;
 }
 
-@media(max-width:480px){
-    .address-card{
-        padding:25px 20px;
-        border-radius:28px;
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px 10px;
+    font-size:13px;
+}
+
+/* TABLET + MOBILE MENU */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
     }
 
-    .address-card h3{
-        font-size:21px;
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:22px 12px;
+    }
+
+    .address-card{
+        padding:30px 24px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .main{
+        padding:18px 10px;
+    }
+
+    .address-card{
+        padding:24px 18px;
+        border-radius:26px;
+    }
+
+    .address-card input,
+    .address-card textarea{
+        padding:12px;
+        font-size:14px;
     }
 
     .actions{
@@ -152,12 +284,43 @@ body{
 
     .btn{
         width:100%;
+        padding:12px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+    .address-card{
+        padding:20px 15px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .btn{
+        font-size:13px;
     }
 }
 </style>
-
 </head>
+
 <body>
+
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/add-address">Addresses</a>
+    </div>
+</div>
+
+<div class="main">
 
 <div class="address-wrapper">
 
@@ -167,21 +330,45 @@ body{
 
         <form method="POST" action="/edit-address">
 
-            <input type="text" name="full_name" placeholder="Full Name" required>
+            <input type="text"
+                   name="full_name"
+                   placeholder="Full Name"
+                   required>
 
-            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="text"
+                   name="phone"
+                   placeholder="Phone Number"
+                   required>
 
-            <textarea name="address" placeholder="Full Address" required></textarea>
+            <textarea name="address"
+                      placeholder="Full Address"
+                      required></textarea>
 
-            <input type="text" name="city" placeholder="City" required>
+            <input type="text"
+                   name="city"
+                   placeholder="City"
+                   required>
 
-            <input type="text" name="state" placeholder="State" required>
+            <input type="text"
+                   name="state"
+                   placeholder="State"
+                   required>
 
-            <input type="text" name="pincode" placeholder="Pincode" required>
+            <input type="text"
+                   name="pincode"
+                   placeholder="Pincode"
+                   required>
 
             <div class="actions">
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a href="/add-address" class="btn btn-secondary">Cancel</a>
+                <button type="submit"
+                        class="btn btn-primary">
+                    Update
+                </button>
+
+                <a href="/add-address"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
             </div>
 
         </form>
@@ -189,6 +376,18 @@ body{
     </div>
 
 </div>
+
+</div>
+
+<div class="footer">
+    © 2026 SmartCart
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

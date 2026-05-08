@@ -13,6 +13,11 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -23,18 +28,33 @@ body{
 
 /* NAVBAR */
 .navbar{
+    width:100%;
     background:#050805;
     padding:16px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
+    gap:14px;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:800;
+    font-size:24px;
+    font-weight:900;
+    color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#dfff45;
+    cursor:pointer;
+    user-select:none;
 }
 
 .nav-links{
@@ -46,13 +66,15 @@ body{
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 14px;
+    padding:9px 15px;
     border-radius:20px;
     font-weight:700;
     font-size:14px;
+    transition:.3s ease;
 }
 
-.nav-links a:hover{
+.nav-links a:hover,
+.nav-links a.active{
     background:#dfff45;
     color:#111;
 }
@@ -60,12 +82,15 @@ body{
 /* MAIN */
 .main{
     flex:1;
-    padding:20px;
+    width:100%;
+    padding:22px 16px;
+    max-width:1300px;
+    margin:0 auto;
 }
 
 /* HERO */
 .hero{
-    padding:18px;
+    padding:22px;
     border-radius:24px;
     text-align:center;
     margin-bottom:18px;
@@ -82,11 +107,11 @@ body{
 
 .hero a{
     display:inline-block;
-    margin-top:12px;
+    margin-top:14px;
     color:#111;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
-    padding:10px 16px;
-    border-radius:20px;
+    padding:11px 18px;
+    border-radius:22px;
     text-decoration:none;
     font-weight:800;
 }
@@ -96,35 +121,50 @@ body{
     background:rgba(223,255,69,.12);
     color:#dfff45;
     border:1px solid rgba(223,255,69,.25);
-    padding:12px;
+    padding:13px;
     border-radius:12px;
     text-align:center;
     margin-bottom:15px;
+    font-weight:700;
+    word-break:break-word;
 }
 
 /* TABLE CARD */
 .table-card{
+    width:100%;
     padding:10px;
     border-radius:24px;
     overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
       linear-gradient(180deg,#081300,#020302);
     box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
+.table-card::-webkit-scrollbar{
+    height:8px;
+}
+
+.table-card::-webkit-scrollbar-thumb{
+    background:#dfff45;
+    border-radius:20px;
+}
+
+/* TABLE */
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:700px;
+    min-width:760px;
 }
 
 th, td{
-    padding:12px;
+    padding:14px 12px;
     text-align:center;
     border-bottom:1px solid rgba(255,255,255,.1);
     font-size:14px;
     color:#ddd;
+    vertical-align:middle;
 }
 
 th{
@@ -136,12 +176,14 @@ tr:hover{
     background:rgba(223,255,69,.05);
 }
 
+/* IMAGE */
 img{
-    width:55px;
-    height:55px;
+    width:60px;
+    height:60px;
     object-fit:contain;
-    border-radius:8px;
+    border-radius:10px;
     background:rgba(255,255,255,.08);
+    padding:4px;
 }
 
 /* CHECKBOX */
@@ -149,6 +191,7 @@ img{
     width:18px;
     height:18px;
     accent-color:#dfff45;
+    cursor:pointer;
 }
 
 /* QTY */
@@ -160,8 +203,8 @@ img{
 }
 
 .qty-btn{
-    width:30px;
-    height:30px;
+    width:32px;
+    height:32px;
     display:inline-flex;
     justify-content:center;
     align-items:center;
@@ -170,6 +213,11 @@ img{
     color:white;
     font-weight:bold;
     font-size:18px;
+    transition:.3s ease;
+}
+
+.qty-btn:hover{
+    transform:scale(1.05);
 }
 
 .minus{
@@ -183,34 +231,39 @@ img{
 .qty-number{
     font-weight:800;
     color:#fff;
-    min-width:20px;
+    min-width:22px;
 }
 
 /* REMOVE */
 .remove{
     background:#ef4444;
     color:white;
-    padding:7px 10px;
+    padding:8px 12px;
     border-radius:20px;
     text-decoration:none;
     font-size:13px;
     font-weight:700;
+    display:inline-block;
 }
 
 /* CART FOOTER */
 .cart-footer{
     margin-top:18px;
-    padding:18px;
+    padding:20px;
     border-radius:24px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
-    gap:10px;
+    gap:14px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
       linear-gradient(180deg,#081300,#020302);
     box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.cart-footer div{
+    font-size:20px;
     font-weight:800;
 }
 
@@ -220,39 +273,113 @@ img{
 
 .checkout{
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
-    padding:12px 18px;
+    padding:13px 22px;
     color:#111;
     border:none;
     border-radius:25px;
     cursor:pointer;
-    font-size:14px;
-    text-decoration:none;
-    font-weight:800;
+    font-size:15px;
+    font-weight:900;
 }
 
 .checkout:hover{
     box-shadow:0 0 20px rgba(211,255,65,.5);
 }
 
-/* MOBILE */
+/* TABLET */
+@media(max-width:900px){
+    .main{
+        padding:18px 14px;
+    }
+}
+
+/* MOBILE MENU */
 @media(max-width:768px){
+    .menu-toggle{
+        display:block;
+    }
+
     .navbar{
-        flex-direction:column;
-        align-items:flex-start;
+        align-items:center;
     }
 
     .nav-links{
+        display:none;
         width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
     }
 
     .nav-links a{
         width:100%;
         text-align:center;
+        background:rgba(255,255,255,.06);
     }
 
     .cart-footer{
         flex-direction:column;
         text-align:center;
+    }
+
+    .checkout{
+        width:100%;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .main{
+        padding:14px 10px;
+    }
+
+    .hero{
+        padding:20px 14px;
+        border-radius:20px;
+    }
+
+    .table-card{
+        border-radius:20px;
+        padding:8px;
+    }
+
+    .cart-footer{
+        border-radius:20px;
+        padding:16px;
+    }
+
+    .cart-footer div{
+        font-size:16px;
+    }
+
+    .checkout{
+        font-size:14px;
+        padding:12px;
+    }
+
+    img{
+        width:50px;
+        height:50px;
+    }
+
+    th, td{
+        padding:12px 10px;
+        font-size:13px;
     }
 }
 </style>
@@ -263,10 +390,12 @@ img{
 <div class="navbar">
     <div class="logo">SmartCart</div>
 
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
         <a href="/user-dashboard">Dashboard</a>
         <a href="/user/products">Products</a>
-        <a href="/user/cart">Cart</a>
+        <a href="/user/cart" class="active">Cart</a>
         <a href="/user-logout">Logout</a>
     </div>
 </div>
@@ -286,10 +415,12 @@ img{
 {% endwith %}
 
 {% if not cart %}
+
     <div class="hero">
         <h3>Cart is empty</h3>
         <a href="/user/products">Shop Now</a>
     </div>
+
 {% else %}
 
 <form method="POST" action="/checkout-selected">
@@ -297,7 +428,6 @@ img{
 <div class="table-card">
 
 <table>
-
 <tr>
     <th>Select</th>
     <th>Image</th>
@@ -310,55 +440,47 @@ img{
 
 {% for pid,item in cart.items() %}
 <tr>
+    <td>
+        <input type="checkbox"
+               class="item-check"
+               name="selected_products"
+               value="{{ pid }}"
+               data-price="{{ item.price }}"
+               data-qty="{{ item.quantity }}">
+    </td>
 
-<td>
-    <input type="checkbox"
-           class="item-check"
-           name="selected_products"
-           value="{{ pid }}"
-           data-price="{{ item.price }}"
-           data-qty="{{ item.quantity }}">
-</td>
+    <td>
+        <img src="/static/uploads/product_images/{{ item.image }}">
+    </td>
 
-<td>
-    <img src="/static/uploads/product_images/{{ item.image }}">
-</td>
+    <td>{{ item.name }}</td>
+    <td>₹{{ item.price }}</td>
 
-<td>{{ item.name }}</td>
+    <td>
+        <div class="qty-box">
+            <a href="/user/cart/decrease/{{ pid }}" class="qty-btn minus">-</a>
+            <span class="qty-number">{{ item.quantity }}</span>
+            <a href="/user/cart/increase/{{ pid }}" class="qty-btn plus">+</a>
+        </div>
+    </td>
 
-<td>₹{{ item.price }}</td>
+    <td>₹{{ item.price * item.quantity }}</td>
 
-<td>
-    <div class="qty-box">
-        <a href="/user/cart/decrease/{{ pid }}" class="qty-btn minus">-</a>
-
-        <span class="qty-number">{{ item.quantity }}</span>
-
-        <a href="/user/cart/increase/{{ pid }}" class="qty-btn plus">+</a>
-    </div>
-</td>
-
-<td>₹{{ item.price * item.quantity }}</td>
-
-<td>
-    <a href="/user/cart/remove/{{ pid }}" class="remove">Remove</a>
-</td>
-
+    <td>
+        <a href="/user/cart/remove/{{ pid }}" class="remove">Remove</a>
+    </td>
 </tr>
 {% endfor %}
-
 </table>
 
 </div>
 
 <div class="cart-footer">
+    <div>
+        Selected Total: ₹<span id="selectedTotal">0</span>
+    </div>
 
-<div>
-    Selected Total: ₹<span id="selectedTotal">0</span>
-</div>
-
-<button type="submit" class="checkout">Checkout</button>
-
+    <button type="submit" class="checkout">Checkout</button>
 </div>
 
 </form>
@@ -368,6 +490,10 @@ img{
 </div>
 
 <script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+
 let checkboxes = document.querySelectorAll(".item-check");
 let totalBox = document.getElementById("selectedTotal");
 

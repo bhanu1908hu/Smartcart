@@ -13,21 +13,23 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
-/* 🔥 BODY WITH IMAGE */
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
     flex-direction:column;
     color:#fff;
-    overflow-x:hidden;
-
     background:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
         url("https://images.unsplash.com/photo-1555529771-7888783a18d3?q=80&w=1470&auto=format&fit=crop");
-
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
+    background-attachment:fixed;
 }
 
 /* NAVBAR */
@@ -38,15 +40,27 @@ body{
     justify-content:space-between;
     align-items:center;
     background:#050805;
-    color:white;
     flex-wrap:wrap;
-    gap:10px;
+    gap:14px;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
     font-size:28px;
-    font-weight:800;
+    font-weight:900;
+    color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
 }
 
 .nav-links{
@@ -57,15 +71,16 @@ body{
 
 .nav-links a{
     text-decoration:none;
-    padding:8px 14px;
+    padding:9px 15px;
     border-radius:20px;
     color:#ccc;
     font-size:14px;
     font-weight:700;
-    transition:.3s;
+    transition:.3s ease;
 }
 
-.nav-links a:hover{
+.nav-links a:hover,
+.nav-links a.active{
     background:#dfff45;
     color:#111;
 }
@@ -73,29 +88,37 @@ body{
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding:30px 20px;
+    padding:32px 16px;
 }
 
 /* FLASH */
+.flash-msg{
+    width:100%;
+    max-width:650px;
+}
+
 .flash-msg p{
     background:rgba(223,255,69,.12);
     color:#dfff45;
     border:1px solid rgba(223,255,69,.25);
-    padding:10px 18px;
+    padding:12px 18px;
     border-radius:12px;
     margin-bottom:20px;
-    font-size:13px;
+    font-size:14px;
+    font-weight:700;
     text-align:center;
+    word-break:break-word;
 }
 
 /* WELCOME CARD */
 .container{
     width:100%;
-    max-width:600px;
-    padding:35px 30px;
+    max-width:650px;
+    padding:36px 28px;
     border-radius:32px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
@@ -125,14 +148,16 @@ body{
 }
 
 h2{
-    font-size:34px;
-    font-weight:800;
+    font-size:clamp(24px,6vw,36px);
+    font-weight:900;
+    color:#dfff45;
+    word-break:break-word;
 }
 
 /* PRODUCT GRID */
 .product-grid{
     width:100%;
-    max-width:1000px;
+    max-width:1050px;
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
     gap:20px;
@@ -140,8 +165,9 @@ h2{
 
 /* PRODUCT CARD */
 .product-card{
+    width:100%;
     border-radius:24px;
-    padding:24px;
+    padding:24px 18px;
     text-align:center;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
@@ -149,7 +175,7 @@ h2{
     box-shadow:0 20px 40px rgba(0,0,0,.35);
     position:relative;
     overflow:hidden;
-    transition:.3s;
+    transition:.3s ease;
 }
 
 .product-card:hover{
@@ -158,20 +184,23 @@ h2{
 
 .product-card h3{
     font-size:18px;
-    margin-bottom:12px;
+    margin-bottom:14px;
     color:#dfff45;
+    word-break:break-word;
 }
 
 .product-card a{
     display:inline-block;
+    width:100%;
+    max-width:170px;
     margin-top:10px;
-    padding:10px 16px;
+    padding:11px 16px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     text-decoration:none;
     border-radius:25px;
     font-size:14px;
-    font-weight:800;
+    font-weight:900;
 }
 
 /* FOOTER */
@@ -179,33 +208,99 @@ h2{
     background:#050805;
     color:#aaa;
     text-align:center;
-    padding:14px;
+    padding:14px 10px;
     font-size:13px;
 }
 
-/* MOBILE */
-@media (max-width:600px){
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
+/* MOBILE MENU */
+@media(max-width:768px){
+    body{
+        background-attachment:scroll;
+    }
+
+    .menu-toggle{
+        display:block;
     }
 
     .nav-links{
+        display:none;
         width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
     }
 
     .nav-links a{
         width:100%;
         text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .main{
+        padding:24px 12px;
     }
 
     .container{
-        padding:25px 20px;
-        border-radius:28px;
+        padding:28px 20px;
+        border-radius:26px;
     }
 
-    h2{
+    .product-grid{
+        grid-template-columns:1fr;
+        max-width:500px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
         font-size:24px;
+    }
+
+    .container{
+        padding:24px 16px;
+        border-radius:22px;
+        margin-bottom:22px;
+    }
+
+    .product-card{
+        padding:22px 16px;
+        border-radius:22px;
+    }
+
+    .product-card a{
+        max-width:100%;
+    }
+
+    .footer{
+        font-size:12px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+    .logo{
+        font-size:22px;
+    }
+
+    .product-card h3{
+        font-size:16px;
+    }
+
+    .product-card a{
+        font-size:13px;
+        padding:10px;
     }
 }
 </style>
@@ -216,8 +311,10 @@ h2{
 <div class="navbar">
     <div class="logo">SmartCart</div>
 
-    <div class="nav-links">
-        <a href="/user-dashboard">Dashboard</a>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/user-dashboard" class="active">Dashboard</a>
         <a href="/user/products">Products</a>
         <a href="/user/cart">Cart</a>
         <a href="/user/profile">Profile</a>
@@ -256,8 +353,14 @@ h2{
 </div>
 
 <div class="footer">
-    © 2025 SmartCart. All rights reserved.
+    © 2026 SmartCart. All rights reserved.
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

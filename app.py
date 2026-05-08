@@ -1624,7 +1624,7 @@ def download_invoice(order_id):
         address=address
     )
 
-    pdf = generate_pdf(html)
+    pdf = generate_pdf(html) 
 
     if not pdf:
         flash("Error generating PDF", "danger")

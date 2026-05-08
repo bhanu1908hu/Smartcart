@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>User Registration</title>
+<meta charset="UTF-8">
+<title>User Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
+<style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
     font-family:'Segoe UI', Arial, sans-serif;
+}
+
+html,body{
+    width:100%;
+    overflow-x:hidden;
 }
 
 body{
@@ -23,28 +28,70 @@ body{
 
 /* HEADER */
 .header{
+    width:100%;
     background:#050805;
     padding:16px 20px;
-    color:white;
-    font-size:22px;
-    font-weight:800;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.logo{
+    color:#dfff45;
+    font-size:24px;
+    font-weight:900;
+}
+
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:800;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
 }
 
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
+    padding:24px 16px;
 }
 
 /* CARD */
 .container{
     width:100%;
-    max-width:380px;
-    padding:35px 30px;
+    max-width:430px;
+    padding:34px 28px;
     border-radius:32px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
@@ -71,94 +118,80 @@ body{
 
 h2{
     text-align:center;
-    margin-bottom:20px;
-    color:#fff;
-    font-size:24px;
-    font-weight:800;
+    margin-bottom:22px;
+    color:#dfff45;
+    font-size:26px;
+    font-weight:900;
 }
 
-/* LABEL */
 label{
-    font-weight:600;
+    font-weight:800;
     display:block;
     margin-top:14px;
-    font-size:13px;
-    color:#e7e7e7;
+    font-size:14px;
+    color:#dfff45;
 }
 
-/* INPUT */
 input{
     width:100%;
     height:48px;
     padding:0 14px;
     margin-top:7px;
-    border-radius:12px;
+    border-radius:13px;
     border:1px solid rgba(255,255,255,.18);
     outline:none;
     font-size:14px;
     background:rgba(0,0,0,.45);
     color:#fff;
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
 input::placeholder{
-    color:#6f6f6f;
+    color:#aaa;
 }
 
 input:focus{
-    border-color:rgba(223,255,69,.6);
+    border-color:#dfff45;
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
-/* BUTTON */
 button{
     width:100%;
     padding:15px;
-    margin-top:22px;
+    margin-top:24px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     border:none;
     color:#111;
     font-size:15px;
     border-radius:25px;
     cursor:pointer;
-    font-weight:800;
-    transition:.3s;
-    box-shadow:0 0 20px rgba(211,255,65,.25);
+    font-weight:900;
 }
 
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(211,255,65,.65);
-}
-
-/* FLASH */
 .flash-message{
     text-align:center;
-    margin-bottom:10px;
-    padding:10px;
-    border-radius:10px;
+    margin-bottom:12px;
+    padding:11px;
+    border-radius:12px;
     background:rgba(223,255,69,.12);
     color:#dfff45;
     font-size:13px;
     border:1px solid rgba(223,255,69,.25);
 }
 
-/* LINK */
 .login-link{
     text-align:center;
     display:block;
-    margin-top:16px;
+    margin-top:18px;
     text-decoration:none;
     color:#fff;
     font-size:14px;
-    font-weight:600;
+    font-weight:700;
 }
 
 .login-link:hover{
     color:#dfff45;
 }
 
-/* FOOTER */
 .footer{
     background:#050805;
     color:#aaa;
@@ -167,40 +200,65 @@ button:hover{
     font-size:13px;
 }
 
-/* MOBILE */
-@media(max-width:480px){
-    .header{
+/* MOBILE MENU */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:10px;
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
         text-align:center;
-        font-size:20px;
+        background:rgba(255,255,255,.06);
+    }
+}
+
+@media(max-width:480px){
+    .main{
+        align-items:flex-start;
+        padding:20px 12px;
     }
 
     .container{
-        padding:25px 20px;
-        border-radius:28px;
+        padding:26px 18px;
+        border-radius:26px;
     }
 
-    h2{
-        font-size:21px;
-    }
-
-    input{
-        height:45px;
-        font-size:13px;
-    }
-
-    button{
-        padding:13px;
-        font-size:14px;
+    .logo{
+        font-size:22px;
     }
 }
-    </style>
-
+</style>
 </head>
 
 <body>
 
 <div class="header">
-    SmartCart
+    <div class="navbar">
+        <div class="logo">SmartCart</div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/user-login">Login</a>
+        </div>
+    </div>
 </div>
 
 <div class="main">
@@ -234,8 +292,14 @@ button:hover{
 </div>
 
 <div class="footer">
-    © 2025 SmartCart. All rights reserved.
+    © 2026 SmartCart. All rights reserved.
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

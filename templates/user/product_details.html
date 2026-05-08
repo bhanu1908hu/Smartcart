@@ -13,6 +13,11 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -23,18 +28,33 @@ body{
 
 /* NAVBAR */
 .navbar{
+    width:100%;
     background:#050805;
     padding:16px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
+    gap:14px;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:800;
+    font-size:24px;
+    font-weight:900;
+    color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
 }
 
 .nav-links{
@@ -46,13 +66,15 @@ body{
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 14px;
+    padding:9px 15px;
     border-radius:20px;
     font-size:14px;
     font-weight:700;
+    transition:.3s ease;
 }
 
-.nav-links a:hover{
+.nav-links a:hover,
+.nav-links a.active{
     background:#dfff45;
     color:#111;
 }
@@ -60,17 +82,18 @@ body{
 /* WRAPPER */
 .product-wrapper{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:25px 20px;
+    padding:28px 16px;
 }
 
 /* CARD */
 .product-card{
     width:100%;
-    max-width:900px;
-    padding:30px;
+    max-width:950px;
+    padding:32px;
     border-radius:30px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
@@ -98,7 +121,7 @@ body{
 /* FLEX */
 .product-layout{
     display:flex;
-    gap:30px;
+    gap:32px;
     align-items:center;
 }
 
@@ -110,10 +133,11 @@ body{
 
 .product-image img{
     width:100%;
-    max-width:300px;
+    max-width:320px;
+    max-height:330px;
     object-fit:contain;
-    border-radius:20px;
-    padding:12px;
+    border-radius:22px;
+    padding:14px;
     background:rgba(255,255,255,.08);
     border:2px solid rgba(223,255,69,.35);
     box-shadow:0 0 22px rgba(223,255,69,.25);
@@ -122,20 +146,23 @@ body{
 /* DETAILS */
 .product-details{
     flex:1;
+    min-width:0;
 }
 
 .product-details h2{
-    margin-bottom:12px;
+    margin-bottom:14px;
     color:#dfff45;
-    font-size:28px;
-    font-weight:800;
+    font-size:clamp(24px,5vw,30px);
+    font-weight:900;
+    word-break:break-word;
 }
 
 .product-details p{
     margin:10px 0;
     color:#ddd;
-    font-size:14px;
-    line-height:1.6;
+    font-size:15px;
+    line-height:1.7;
+    word-break:break-word;
 }
 
 .product-details strong{
@@ -144,33 +171,41 @@ body{
 
 /* PRICE */
 .price{
-    font-size:28px !important;
-    font-weight:800;
+    font-size:clamp(24px,6vw,30px) !important;
+    font-weight:900;
     color:#dfff45 !important;
-    margin-top:14px !important;
+    margin-top:16px !important;
 }
 
 /* BUTTONS */
 .buttons{
-    margin-top:22px;
+    margin-top:24px;
     display:flex;
     gap:10px;
     flex-wrap:wrap;
 }
 
+.buttons form{
+    flex:1;
+}
+
 .btn{
-    padding:12px 18px;
+    width:100%;
+    padding:13px 18px;
     border:none;
     border-radius:25px;
     font-size:14px;
     cursor:pointer;
     text-decoration:none;
-    font-weight:800;
-    display:inline-block;
+    font-weight:900;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    transition:.3s ease;
 }
 
-/* COLORS */
 .back-btn{
+    flex:1;
     background:rgba(255,255,255,.12);
     color:#fff;
     border:1px solid rgba(255,255,255,.18);
@@ -195,24 +230,51 @@ body{
     background:#050805;
     color:#aaa;
     text-align:center;
-    padding:14px;
+    padding:14px 10px;
     font-size:13px;
 }
 
-/* RESPONSIVE */
+/* TABLET */
+@media(max-width:900px){
+    .product-layout{
+        gap:24px;
+    }
+
+    .product-card{
+        padding:26px;
+    }
+}
+
+/* MOBILE MENU */
 @media(max-width:768px){
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
+    .menu-toggle{
+        display:block;
     }
 
     .nav-links{
+        display:none;
         width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
     }
 
     .nav-links a{
         width:100%;
         text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .product-wrapper{
+        align-items:flex-start;
+        padding:20px 12px;
     }
 
     .product-layout{
@@ -220,28 +282,57 @@ body{
         text-align:center;
     }
 
+    .product-card{
+        padding:24px 18px;
+        border-radius:26px;
+    }
+
+    .product-image img{
+        max-width:280px;
+        max-height:280px;
+    }
+
     .buttons{
-        justify-content:center;
         flex-direction:column;
     }
 
-    .btn,
+    .back-btn,
     .buttons form,
     .buttons button{
         width:100%;
     }
+}
 
-    .product-card{
-        padding:24px 20px;
-        border-radius:26px;
+/* SMALL MOBILE */
+@media(max-width:380px){
+    .navbar{
+        padding:14px 12px;
     }
 
-    .product-details h2{
-        font-size:24px;
+    .logo{
+        font-size:20px;
+    }
+
+    .product-card{
+        padding:20px 14px;
+        border-radius:22px;
+    }
+
+    .product-image img{
+        max-width:230px;
+        max-height:240px;
+    }
+
+    .product-details p{
+        font-size:14px;
+    }
+
+    .btn{
+        padding:12px;
+        font-size:13px;
     }
 }
 </style>
-
 </head>
 
 <body>
@@ -249,9 +340,11 @@ body{
 <div class="navbar">
     <div class="logo">🛒 SmartCart</div>
 
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
         <a href="/user-dashboard">Dashboard</a>
-        <a href="/user/products">Products</a>
+        <a href="/user/products" class="active">Products</a>
         <a href="/user/cart">Cart</a>
         <a href="/user-logout">Logout</a>
     </div>
@@ -297,6 +390,12 @@ body{
 <div class="footer">
     © 2026 SmartCart | All rights reserved 🚀
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

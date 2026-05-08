@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact SmartCart</title>
+<title>Cart</title>
 
 <style>
 *{
@@ -13,236 +13,363 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
+    display:flex;
+    flex-direction:column;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
 }
 
-/* HEADER */
-.header{
+/* NAVBAR */
+.navbar{
+    width:100%;
     background:#050805;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-
-.top-bar{
     padding:16px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
+    gap:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo-icon{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:rgba(223,255,69,.12);
-    color:#dfff45;
-    border:1px solid rgba(223,255,69,.25);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-.logo-text{
-    font-size:28px;
+.logo{
+    font-size:24px;
     font-weight:900;
-    color:#fff;
-}
-
-.logo-text span{
     color:#dfff45;
 }
 
-/* NAV */
-.nav-menu{
+.nav-links{
     display:flex;
     gap:10px;
+    flex-wrap:wrap;
 }
 
-.nav-menu a{
+.nav-links a{
     text-decoration:none;
     color:#ccc;
-    font-weight:800;
-    padding:8px 14px;
+    padding:9px 15px;
     border-radius:20px;
+    font-weight:700;
+    font-size:14px;
+    transition:.3s ease;
 }
 
-.nav-menu a:hover,
-.nav-menu .active{
+.nav-links a:hover{
     background:#dfff45;
     color:#111;
 }
 
-/* HAMBURGER */
-.menu-toggle{
-    display:none;
-    font-size:28px;
-    color:#dfff45;
-    cursor:pointer;
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
+    padding:22px 16px;
+    max-width:1300px;
+    margin:0 auto;
 }
 
-/* PAGE */
-.page{
-    padding:35px 16px;
-}
-
-.contact-card{
-    max-width:700px;
-    margin:auto;
-    padding:32px;
-    border-radius:30px;
+/* HERO */
+.hero{
+    padding:22px;
+    border-radius:24px;
+    text-align:center;
+    margin-bottom:18px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
       linear-gradient(180deg,#081300,#020302);
-    box-shadow:0 25px 55px rgba(0,0,0,.45);
-    position:relative;
-    overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
-.contact-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
-    background-size:9px 9px;
-    opacity:.08;
-    pointer-events:none;
-}
-
-.contact-card > *{
-    position:relative;
-    z-index:2;
-}
-
-.contact-card h1{
-    font-size:32px;
-    margin-bottom:8px;
-    color:#dfff45;
-}
-
-.contact-card p{
-    color:#aaa;
-    margin-bottom:24px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:800;
-    color:#e7e7e7;
-}
-
-input,
-textarea{
-    width:100%;
-    padding:14px;
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:12px;
-    font-size:15px;
-    background:rgba(0,0,0,.45);
+.hero h2,
+.hero h3{
     color:#fff;
-    outline:none;
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
-textarea{
-    min-height:140px;
-    resize:vertical;
-}
-
-input:focus,
-textarea:focus{
-    border-color:rgba(223,255,69,.6);
-    box-shadow:0 0 14px rgba(223,255,69,.25);
-}
-
-button{
-    width:100%;
-    border:none;
-    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+.hero a{
+    display:inline-block;
+    margin-top:14px;
     color:#111;
-    padding:15px;
-    border-radius:25px;
-    font-size:16px;
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    padding:11px 18px;
+    border-radius:22px;
+    text-decoration:none;
     font-weight:800;
+}
+
+/* FLASH */
+.flash{
+    background:rgba(223,255,69,.12);
+    color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
+    padding:13px;
+    border-radius:12px;
+    text-align:center;
+    margin-bottom:15px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+/* TABLE CARD */
+.table-card{
+    width:100%;
+    padding:10px;
+    border-radius:24px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.table-card::-webkit-scrollbar{
+    height:8px;
+}
+
+.table-card::-webkit-scrollbar-thumb{
+    background:#dfff45;
+    border-radius:20px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:760px;
+}
+
+th, td{
+    padding:14px 12px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    font-size:14px;
+    color:#ddd;
+    vertical-align:middle;
+}
+
+th{
+    background:#111;
+    color:#dfff45;
+    font-size:14px;
+}
+
+tr:hover{
+    background:rgba(223,255,69,.05);
+}
+
+/* IMAGE */
+img{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+    border-radius:10px;
+    background:rgba(255,255,255,.08);
+    padding:4px;
+}
+
+/* CHECKBOX */
+.item-check{
+    width:18px;
+    height:18px;
+    accent-color:#dfff45;
     cursor:pointer;
 }
 
-button:hover{
-    box-shadow:0 0 25px rgba(211,255,65,.65);
+/* QTY */
+.qty-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
 }
 
-.flash p{
-    background:#dcfce7;
-    color:#166534;
-    padding:12px;
-    border-radius:12px;
-    margin-bottom:16px;
-    font-weight:700;
-    border:1px solid #22c55e;
+.qty-btn{
+    width:32px;
+    height:32px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+    font-size:18px;
+    transition:.3s ease;
 }
 
-/* FOOTER */
-.footer{
-    margin-top:30px;
-    background:#050805;
-    color:#aaa;
-    text-align:center;
-    padding:16px;
+.qty-btn:hover{
+    transform:scale(1.05);
+}
+
+.minus{
+    background:#ef4444;
+}
+
+.plus{
+    background:#22c55e;
+}
+
+.qty-number{
+    font-weight:800;
+    color:#fff;
+    min-width:22px;
+}
+
+/* REMOVE */
+.remove{
+    background:#ef4444;
+    color:white;
+    padding:8px 12px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:13px;
     font-weight:700;
+    display:inline-block;
+    transition:.3s ease;
+}
+
+.remove:hover{
+    opacity:.9;
+}
+
+/* CART FOOTER */
+.cart-footer{
+    margin-top:18px;
+    padding:20px;
+    border-radius:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+    background:
+      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
+      linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+.cart-footer div{
+    font-size:20px;
+    font-weight:800;
+}
+
+#selectedTotal{
+    color:#dfff45;
+}
+
+/* CHECKOUT */
+.checkout{
+    background:linear-gradient(90deg,#e6ff45,#c9ff22);
+    padding:13px 22px;
+    color:#111;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:15px;
+    text-decoration:none;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.checkout:hover{
+    box-shadow:0 0 20px rgba(211,255,65,.5);
+}
+
+/* TABLET */
+@media(max-width:900px){
+    .main{
+        padding:18px 14px;
+    }
+
+    .cart-footer div{
+        font-size:18px;
+    }
 }
 
 /* MOBILE */
 @media(max-width:768px){
-    .menu-toggle{
-        display:block;
-    }
-
-    .nav-menu{
-        display:none;
-        width:100%;
+    .navbar{
         flex-direction:column;
-        margin-top:10px;
-        background:rgba(255,255,255,.08);
-        padding:10px;
-        border-radius:16px;
+        align-items:stretch;
+        padding:14px;
     }
 
-    .nav-menu.show{
-        display:flex;
-    }
-
-    .nav-menu a{
-        width:100%;
+    .logo{
         text-align:center;
     }
 
-    .logo-text{
-        font-size:24px;
+    .nav-links{
+        width:100%;
+        flex-direction:column;
     }
 
-    .contact-card h1{
-        font-size:26px;
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .hero{
+        padding:20px 16px;
+    }
+
+    .cart-footer{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .checkout{
+        width:100%;
     }
 }
 
+/* SMALL MOBILE */
 @media(max-width:480px){
-    .contact-card{
-        padding:24px 20px;
-        border-radius:26px;
+    .main{
+        padding:14px 10px;
+    }
+
+    .hero{
+        border-radius:20px;
+    }
+
+    .table-card{
+        border-radius:20px;
+        padding:8px;
+    }
+
+    .cart-footer{
+        border-radius:20px;
+        padding:16px;
+    }
+
+    .cart-footer div{
+        font-size:16px;
+    }
+
+    .checkout{
+        font-size:14px;
+        padding:12px;
+    }
+
+    img{
+        width:50px;
+        height:50px;
+    }
+
+    th, td{
+        padding:12px 10px;
+        font-size:13px;
     }
 }
 </style>
@@ -250,73 +377,126 @@ button:hover{
 
 <body>
 
-<div class="header">
-    <div class="top-bar">
+<div class="navbar">
+    <div class="logo">SmartCart</div>
 
-        <div class="brand">
-            <div class="logo-icon">🛍️</div>
-            <div class="logo-text">Smart<span>Cart</span></div>
-        </div>
-
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-        <div class="nav-menu" id="navMenu">
-            <a href="/user-login">Login</a>
-            <a href="/about">About</a>
-            <a href="/contact" class="active">Contact</a>
-        </div>
-
+    <div class="nav-links">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user-logout">Logout</a>
     </div>
 </div>
 
-<div class="page">
+<div class="main">
 
-<div class="contact-card">
+<div class="hero">
+    <h2>Your Cart</h2>
+</div>
 
-    <h1>Contact Us</h1>
-    <p>Send your queries, issues, or feedback to SmartCart.</p>
-
-    <div class="flash">
-        {% with messages = get_flashed_messages(with_categories=true) %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
         {% for category, message in messages %}
-        <p>{{ message }}</p>
+            <div class="flash">{{ message }}</div>
         {% endfor %}
-        {% endwith %}
+    {% endif %}
+{% endwith %}
+
+{% if not cart %}
+
+    <div class="hero">
+        <h3>Cart is empty</h3>
+        <a href="/user/products">Shop Now</a>
     </div>
 
-    <form method="POST">
+{% else %}
 
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" name="name" required>
+<form method="POST" action="/checkout-selected">
+
+<div class="table-card">
+
+<table>
+<tr>
+    <th>Select</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Total</th>
+    <th>Action</th>
+</tr>
+
+{% for pid,item in cart.items() %}
+<tr>
+    <td>
+        <input type="checkbox"
+               class="item-check"
+               name="selected_products"
+               value="{{ pid }}"
+               data-price="{{ item.price }}"
+               data-qty="{{ item.quantity }}">
+    </td>
+
+    <td>
+        <img src="/static/uploads/product_images/{{ item.image }}">
+    </td>
+
+    <td>{{ item.name }}</td>
+
+    <td>₹{{ item.price }}</td>
+
+    <td>
+        <div class="qty-box">
+            <a href="/user/cart/decrease/{{ pid }}" class="qty-btn minus">-</a>
+            <span class="qty-number">{{ item.quantity }}</span>
+            <a href="/user/cart/increase/{{ pid }}" class="qty-btn plus">+</a>
         </div>
+    </td>
 
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" required>
-        </div>
+    <td>₹{{ item.price * item.quantity }}</td>
 
-        <div class="form-group">
-            <label>Your Message</label>
-            <textarea name="message" required></textarea>
-        </div>
-
-        <button type="submit">Send Message</button>
-
-    </form>
+    <td>
+        <a href="/user/cart/remove/{{ pid }}" class="remove">Remove</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
 
 </div>
 
+<div class="cart-footer">
+    <div>
+        Selected Total: ₹<span id="selectedTotal">0</span>
+    </div>
+
+    <button type="submit" class="checkout">Checkout</button>
 </div>
 
-<div class="footer">
-© 2026 SmartCart  . All Rights Reserved
+</form>
+
+{% endif %}
+
 </div>
 
 <script>
-function toggleMenu(){
-    document.getElementById("navMenu").classList.toggle("show");
+let checkboxes = document.querySelectorAll(".item-check");
+let totalBox = document.getElementById("selectedTotal");
+
+function updateTotal(){
+    let total = 0;
+
+    checkboxes.forEach(cb=>{
+        if(cb.checked){
+            total += parseFloat(cb.dataset.price) * parseInt(cb.dataset.qty);
+        }
+    });
+
+    totalBox.innerText = total.toFixed(2);
 }
+
+checkboxes.forEach(cb=>{
+    cb.addEventListener("change", updateTotal);
+});
 </script>
 
 </body>

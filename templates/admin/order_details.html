@@ -13,20 +13,32 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
+    min-height:100vh;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
 }
 
 /* NAVBAR */
 .navbar{
-    background:#050805;
-    padding:16px 20px;
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:12px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
     flex-wrap:wrap;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .logo{
@@ -34,11 +46,13 @@ body{
     align-items:center;
     gap:10px;
     color:white;
+    min-width:0;
 }
 
 .logo-icon{
     width:42px;
     height:42px;
+    min-width:42px;
     border-radius:50%;
     background:rgba(223,255,69,.12);
     display:flex;
@@ -50,11 +64,34 @@ body{
 
 .logo h1{
     font-size:24px;
-    font-weight:800;
+    font-weight:900;
+    white-space:nowrap;
 }
 
 .logo span{
     color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
 }
 
 /* NAV LINKS */
@@ -62,16 +99,20 @@ body{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 14px;
+    padding:9px 14px;
     border-radius:20px;
     font-size:14px;
-    font-weight:600;
+    font-weight:700;
     transition:.3s;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.16);
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
@@ -81,13 +122,15 @@ body{
 
 /* MAIN */
 .container{
+    width:100%;
     max-width:1200px;
-    margin:30px auto;
-    padding:0 15px;
+    margin:0 auto;
+    padding:12px 18px;
 }
 
 /* CARD */
 .card{
+    width:100%;
     border-radius:24px;
     padding:25px;
     background:
@@ -126,6 +169,7 @@ body{
 .header h2{
     font-size:24px;
     color:#fff;
+    word-break:break-word;
 }
 
 /* STATUS */
@@ -148,11 +192,11 @@ body{
 
 /* INFO BOX */
 .info-box{
+    min-width:0;
     background:rgba(0,0,0,.45);
     padding:15px;
     border-radius:16px;
     border:1px solid rgba(255,255,255,.12);
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
 .info-box h4{
@@ -165,6 +209,8 @@ body{
     font-size:16px;
     font-weight:700;
     color:#fff;
+    word-break:break-word;
+    line-height:1.4;
 }
 
 /* SECTION */
@@ -200,12 +246,12 @@ select{
     outline:none;
 }
 
-select:focus{
-    border-color:rgba(223,255,69,.6);
-    box-shadow:0 0 14px rgba(223,255,69,.25);
+select option{
+    background:#081300;
+    color:#fff;
 }
 
-button{
+button[type="submit"]{
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     border:none;
@@ -214,12 +260,6 @@ button{
     cursor:pointer;
     font-weight:800;
     height:45px;
-    transition:.3s;
-}
-
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(211,255,65,.65);
 }
 
 /* TABLE */
@@ -232,7 +272,9 @@ button:hover{
 }
 
 .table-wrap{
+    width:100%;
     overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
 table{
@@ -253,10 +295,7 @@ td{
     padding:12px;
     border-bottom:1px solid rgba(255,255,255,.1);
     color:#ddd;
-}
-
-tr:hover{
-    background:rgba(223,255,69,.05);
+    font-size:14px;
 }
 
 /* BACK */
@@ -277,27 +316,69 @@ tr:hover{
 
 /* FOOTER */
 .footer{
+    width:100%;
     text-align:center;
-    padding:20px;
+    padding:20px 10px;
     color:#444;
+    font-size:13px;
+    font-weight:700;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
+/* MOBILE */
+@media(max-width:600px){
+
     .navbar{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
+        width:calc(100% - 24px);
+        margin:12px auto;
+        padding:14px 16px;
+        border-radius:22px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .logo{
+        width:auto;
+    }
+
+    .logo h1{
+        font-size:20px;
+    }
+
+    .logo-icon{
+        width:38px;
+        height:38px;
+        min-width:38px;
+        font-size:18px;
     }
 
     .nav-links{
+        display:none;
         width:100%;
-        justify-content:center;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
     }
 
     .nav-links a{
-        flex:1 1 45%;
+        width:100%;
         text-align:center;
+        font-size:13px;
+        padding:10px;
+    }
+
+    .container{
+        padding:8px 12px;
+    }
+
+    .card{
+        padding:18px 14px;
+        border-radius:22px;
     }
 
     .header{
@@ -306,37 +387,53 @@ tr:hover{
     }
 
     .header h2{
-        font-size:20px;
+        font-size:19px;
+    }
+
+    .status-badge{
+        width:100%;
+        text-align:center;
     }
 
     .grid{
         grid-template-columns:1fr;
     }
 
+    .section-title{
+        font-size:18px;
+    }
+
     form{
         flex-direction:column;
     }
 
-    button{
+    select,
+    button[type="submit"]{
         width:100%;
-    }
-}
-
-@media(max-width:480px){
-    .nav-links a{
-        flex:1 1 100%;
-    }
-
-    .logo h1{
-        font-size:20px;
-    }
-
-    .card{
-        padding:18px;
+        min-width:100%;
     }
 
     table{
         min-width:450px;
+    }
+
+    th,td{
+        padding:10px;
+        font-size:13px;
+    }
+
+    .footer{
+        font-size:12px;
+    }
+}
+
+@media(max-width:360px){
+    .card{
+        padding:16px 12px;
+    }
+
+    .header h2{
+        font-size:18px;
     }
 }
 </style>
@@ -345,17 +442,25 @@ tr:hover{
 <body>
 
 <div class="navbar">
+
     <div class="logo">
         <div class="logo-icon">🛍️</div>
         <h1>Smart<span>Cart</span></h1>
     </div>
 
-    <div class="nav-links">
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
         <a href="/admin-dashboard">Dashboard</a>
         <a href="/admin/orders">Orders</a>
         <a href="/admin/item-list">Products</a>
         <a href="/admin-logout">Logout</a>
     </div>
+
 </div>
 
 <div class="container">
@@ -368,6 +473,7 @@ tr:hover{
     </div>
 
     <h3 class="section-title">Customer Details</h3>
+
     <div class="grid">
         <div class="info-box"><h4>Name</h4><p>{{ order.user_name }}</p></div>
         <div class="info-box"><h4>Email</h4><p>{{ order.user_email }}</p></div>
@@ -376,6 +482,7 @@ tr:hover{
     </div>
 
     <h3 class="section-title">Order Summary</h3>
+
     <div class="grid">
         <div class="info-box"><h4>Payment</h4><p>{{ order.payment_status }}</p></div>
         <div class="info-box"><h4>Total</h4><p>₹{{ order.amount }}</p></div>
@@ -384,23 +491,29 @@ tr:hover{
     </div>
 
     <h3 class="section-title">Update Status</h3>
+
     <div class="form-box">
         <form method="POST" action="/admin/update-order-status/{{ order.order_id }}">
+
             <select name="status">
-                <option>Pending</option>
-                <option>Confirmed</option>
-                <option>Packed</option>
-                <option>Shipped</option>
-                <option>Delivered</option>
+                <option {% if order.order_status == 'Pending' %}selected{% endif %}>Pending</option>
+                <option {% if order.order_status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                <option {% if order.order_status == 'Packed' %}selected{% endif %}>Packed</option>
+                <option {% if order.order_status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                <option {% if order.order_status == 'Delivered' %}selected{% endif %}>Delivered</option>
             </select>
+
             <button type="submit">Update</button>
+
         </form>
     </div>
 
     <h3 class="section-title">Items</h3>
+
     <div class="table-card">
         <div class="table-wrap">
             <table>
+
                 <tr>
                     <th>Product</th>
                     <th>Qty</th>
@@ -414,6 +527,7 @@ tr:hover{
                     <td>₹{{ it.price }}</td>
                 </tr>
                 {% endfor %}
+
             </table>
         </div>
     </div>
@@ -429,6 +543,12 @@ tr:hover{
 </div>
 
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

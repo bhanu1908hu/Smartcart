@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment Successful</title>
+<meta charset="UTF-8">
+<title>Payment Successful</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
+<style>
 *{
     margin:0;
     padding:0;
@@ -13,21 +13,85 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+    flex-direction:column;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#dfff45;
+    font-size:24px;
+    font-weight:900;
+}
+
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:24px 16px;
 }
 
 /* CARD */
 .card{
     width:100%;
-    max-width:420px;
-    padding:35px 30px;
+    max-width:440px;
+    padding:36px 30px;
     border-radius:32px;
     text-align:center;
     background:
@@ -55,24 +119,24 @@ body{
 
 /* ICON */
 .icon{
-    font-size:55px;
-    margin-bottom:12px;
+    font-size:58px;
+    margin-bottom:14px;
 }
 
 /* TITLE */
 h2{
     color:#dfff45;
-    margin-bottom:15px;
-    font-size:24px;
+    margin-bottom:16px;
+    font-size:clamp(21px,6vw,26px);
 }
 
 /* DETAILS */
 .details{
     background:rgba(0,0,0,.45);
     border:1px solid rgba(255,255,255,.12);
-    padding:15px;
-    border-radius:14px;
-    margin-bottom:22px;
+    padding:16px;
+    border-radius:16px;
+    margin-bottom:24px;
     text-align:left;
     font-size:14px;
     color:#ddd;
@@ -80,7 +144,8 @@ h2{
 }
 
 .details p{
-    margin:6px 0;
+    margin:7px 0;
+    line-height:1.6;
 }
 
 /* BUTTON */
@@ -92,33 +157,113 @@ a.button{
     color:#111;
     text-decoration:none;
     border-radius:25px;
-    font-weight:800;
-    transition:.3s;
+    font-weight:900;
+    transition:.3s ease;
 }
 
 a.button:hover{
     box-shadow:0 0 20px rgba(211,255,65,.6);
 }
 
-/* MOBILE */
-@media(max-width:480px){
-    .card{
-        padding:25px 20px;
-        border-radius:28px;
+/* MOBILE MENU */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
     }
 
-    h2{
-        font-size:20px;
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .main{
+        align-items:flex-start;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .main{
+        padding:18px 12px;
+    }
+
+    .card{
+        padding:26px 18px;
+        border-radius:26px;
     }
 
     .icon{
-        font-size:45px;
+        font-size:48px;
+    }
+
+    .details{
+        padding:14px;
+        font-size:13px;
+    }
+
+    a.button{
+        padding:13px;
+        font-size:14px;
     }
 }
-    </style>
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+    .logo{
+        font-size:20px;
+    }
+
+    .card{
+        padding:22px 15px;
+    }
+
+    .icon{
+        font-size:44px;
+    }
+}
+</style>
 </head>
 
 <body>
+
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/my-orders">My Orders</a>
+    </div>
+</div>
+
+<div class="main">
 
 <div class="card">
 
@@ -134,6 +279,14 @@ a.button:hover{
     <a href="/user/products" class="button">Continue Shopping</a>
 
 </div>
+
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

@@ -13,14 +13,101 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px;
+    flex-direction:column;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
+}
+
+/* HEADER */
+.header{
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    color:#fff;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:700;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.16);
+    white-space:nowrap;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px;
 }
 
 /* CARD */
@@ -52,7 +139,6 @@ body{
     z-index:2;
 }
 
-/* TITLE */
 h2{
     text-align:center;
     margin-bottom:20px;
@@ -61,7 +147,6 @@ h2{
     font-weight:800;
 }
 
-/* FLASH */
 .flash-message{
     background:rgba(223,255,69,.12);
     color:#dfff45;
@@ -71,9 +156,9 @@ h2{
     text-align:center;
     margin-bottom:12px;
     font-size:13px;
+    word-wrap:break-word;
 }
 
-/* LABEL */
 label{
     display:block;
     font-weight:600;
@@ -82,7 +167,6 @@ label{
     margin-top:14px;
 }
 
-/* INPUT */
 input{
     width:100%;
     height:48px;
@@ -94,7 +178,6 @@ input{
     font-size:14px;
     background:rgba(0,0,0,.45);
     color:#fff;
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
 input::placeholder{
@@ -106,8 +189,7 @@ input:focus{
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
-/* BUTTON */
-button{
+button[type="submit"]{
     width:100%;
     padding:15px;
     margin-top:22px;
@@ -118,20 +200,53 @@ button{
     font-size:15px;
     font-weight:800;
     cursor:pointer;
-    transition:.3s;
-    box-shadow:0 0 20px rgba(211,255,65,.25);
-}
-
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(211,255,65,.65);
 }
 
 /* MOBILE */
-@media(max-width:480px){
+@media(max-width:600px){
+    .header{
+        width:calc(100% - 24px);
+        margin:12px auto;
+        padding:14px 16px;
+        border-radius:22px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        font-size:13px;
+        padding:10px;
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:12px;
+    }
+
     .container{
-        padding:25px 20px;
-        border-radius:28px;
+        margin-top:28px;
+        padding:25px 16px;
+        border-radius:26px;
     }
 
     h2{
@@ -143,9 +258,19 @@ button:hover{
         font-size:13px;
     }
 
-    button{
+    button[type="submit"]{
         padding:13px;
         font-size:14px;
+    }
+}
+
+@media(max-width:360px){
+    .container{
+        padding:22px 13px;
+    }
+
+    h2{
+        font-size:20px;
     }
 }
 </style>
@@ -153,29 +278,53 @@ button:hover{
 
 <body>
 
-<div class="container">
+<div class="header">
+    <div class="logo">Smart<span>Cart</span></div>
 
-<h2>Verify OTP</h2>
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% for category, message in messages %}
-    <p class="flash-message">{{ message }}</p>
-  {% endfor %}
-{% endwith %}
-
-<form method="POST" action="/verify-otp">
-
-    <label>Enter OTP</label>
-    <input type="text" name="otp" placeholder="Enter OTP" required>
-
-    <label>Create Password</label>
-    <input type="password" name="password" placeholder="Create password" required>
-
-    <button type="submit">Verify & Register</button>
-
-</form>
-
+    <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/admin-login">Admin Login</a>
+        <a href="/admin-signup">Register</a>
+    </div>
 </div>
+
+<div class="main">
+    <div class="container">
+
+        <h2>Verify OTP</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <p class="flash-message">{{ message }}</p>
+          {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/verify-otp">
+
+            <label>Enter OTP</label>
+            <input type="text" name="otp" placeholder="Enter OTP" required>
+
+            <label>Create Password</label>
+            <input type="password" name="password" placeholder="Create password" required>
+
+            <button type="submit">Verify & Register</button>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

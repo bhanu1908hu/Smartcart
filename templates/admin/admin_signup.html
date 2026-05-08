@@ -13,6 +13,11 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -23,34 +28,69 @@ body{
 
 /* NAVBAR */
 .navbar{
-    width:100%;
-    background:#050805;
-    padding:16px 8%;
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    gap:12px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    flex-wrap:wrap;
 }
 
 .logo{
     font-size:26px;
-    font-weight:800;
+    font-weight:900;
     color:#fff;
-    text-align:left;
+    white-space:nowrap;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+    box-shadow:none;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
 }
 
 .nav-links{
     display:flex;
-    gap:15px;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .nav-links a{
     text-decoration:none;
     color:#ccc;
     font-weight:700;
-    padding:8px 14px;
+    font-size:14px;
+    padding:9px 14px;
     border-radius:20px;
     transition:.3s;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.16);
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
@@ -61,10 +101,11 @@ body{
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:40px 20px;
+    padding:22px;
 }
 
 /* CARD */
@@ -83,7 +124,6 @@ body{
     overflow:hidden;
 }
 
-/* dots effect */
 .box::before{
     content:"";
     position:absolute;
@@ -100,7 +140,6 @@ body{
 }
 
 .box h2{
-    text-align:center;
     color:#fff;
     font-size:28px;
     margin-bottom:10px;
@@ -108,13 +147,12 @@ body{
 }
 
 .subtitle{
-    text-align:center;
     color:#9d9d9d;
     font-size:13px;
     margin-bottom:24px;
+    line-height:1.5;
 }
 
-/* FORM */
 label{
     display:block;
     margin-bottom:6px;
@@ -135,7 +173,6 @@ input{
     margin-bottom:16px;
     background:rgba(0,0,0,.45);
     color:#fff;
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
 input::placeholder{
@@ -147,8 +184,7 @@ input:focus{
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
-/* BUTTON */
-button{
+button[type="submit"]{
     width:100%;
     padding:15px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
@@ -159,20 +195,19 @@ button{
     font-weight:800;
     cursor:pointer;
     transition:.3s;
-    box-shadow:0 0 20px rgba(211,255,65,.25);
 }
 
-button:hover{
+button[type="submit"]:hover{
     transform:translateY(-2px);
     box-shadow:0 0 25px rgba(211,255,65,.65);
 }
 
-/* LOGIN LINK */
 .login-link{
     text-align:center;
     margin-top:18px;
     color:#aaa;
     font-size:13px;
+    line-height:1.6;
 }
 
 .login-link a{
@@ -185,7 +220,6 @@ button:hover{
     color:#dfff45;
 }
 
-/* FLASH */
 .flash{
     padding:10px;
     border-radius:12px;
@@ -195,58 +229,71 @@ button:hover{
     border:1px solid rgba(223,255,69,.25);
     background:rgba(223,255,69,.12);
     color:#dfff45;
+    word-wrap:break-word;
 }
 
 /* FOOTER */
 .footer{
-    background:#050805;
-    color:#aaa;
-    text-align:center;
+    width:calc(100% - 36px);
+    margin:18px auto;
     padding:14px;
+    border-radius:24px;
+    text-align:center;
+    color:#dfff45;
+    background:linear-gradient(180deg,#081300,#020302);
+    box-shadow:0 14px 35px rgba(0,0,0,.3);
     font-size:13px;
+    font-weight:700;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
+/* MOBILE */
+@media(max-width:600px){
     .navbar{
-        padding:14px 5%;
+        width:calc(100% - 24px);
+        margin:12px auto;
+        padding:14px 16px;
+        border-radius:22px;
     }
 
     .logo{
-        font-size:22px;
+        font-size:21px;
+    }
+
+    .menu-toggle{
+        display:block;
     }
 
     .nav-links{
-        gap:10px;
+        display:none;
+        width:100%;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        font-size:13px;
+        padding:11px;
     }
 
     .main{
-        padding:30px 15px;
+        align-items:flex-start;
+        padding:12px;
     }
 
     .box{
-        padding:30px 24px;
-    }
-}
-
-@media(max-width:480px){
-    .navbar{
-        flex-direction:column;
-        gap:10px;
-    }
-
-    .nav-links{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .box{
-        padding:25px 20px;
-        border-radius:28px;
+        padding:25px 16px;
+        border-radius:26px;
     }
 
     .box h2{
-        font-size:24px;
+        font-size:23px;
     }
 
     input{
@@ -254,9 +301,29 @@ button:hover{
         font-size:13px;
     }
 
-    button{
+    button[type="submit"]{
         padding:13px;
         font-size:14px;
+    }
+
+    .footer{
+        width:calc(100% - 24px);
+        margin:12px auto;
+        font-size:12px;
+    }
+}
+
+@media(max-width:360px){
+    .box{
+        padding:22px 13px;
+    }
+
+    .box h2{
+        font-size:21px;
+    }
+
+    input{
+        padding:0 12px;
     }
 }
 </style>
@@ -267,14 +334,19 @@ button:hover{
 <nav class="navbar">
     <div class="logo">🛒 SmartCart</div>
 
-    <div class="nav-links">
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
         <a href="/">Home</a>
         <a href="/admin-login">Admin Login</a>
     </div>
 </nav>
 
 <div class="main">
-
     <div class="box">
         <h2>Admin Registration</h2>
         <p class="subtitle">Create your SmartCart admin account and verify using OTP.</p>
@@ -303,14 +375,18 @@ button:hover{
             Already have an account?
             <a href="/admin-login">Login here</a>
         </div>
-
     </div>
-
 </div>
 
 <footer class="footer">
     © 2026 SmartCart. All Rights Reserved.
 </footer>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

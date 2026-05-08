@@ -13,6 +13,11 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -23,20 +28,47 @@ body{
 
 /* HEADER */
 .header{
-    background:#050805;
-    padding:16px 20px;
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    color:white;
+    gap:12px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
     flex-wrap:wrap;
-    gap:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 .logo{
     font-size:22px;
-    font-weight:800;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
 }
 
 /* NAV */
@@ -44,16 +76,20 @@ body{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 14px;
+    padding:9px 14px;
     border-radius:20px;
     font-size:13px;
     font-weight:700;
     transition:.3s;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.16);
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
@@ -64,10 +100,11 @@ body{
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:25px 20px;
+    padding:22px;
 }
 
 /* CARD */
@@ -99,7 +136,6 @@ body{
     z-index:2;
 }
 
-/* TITLE */
 h2{
     text-align:center;
     margin-bottom:18px;
@@ -108,7 +144,6 @@ h2{
     font-weight:800;
 }
 
-/* FLASH */
 .flash{
     background:rgba(223,255,69,.12);
     color:#dfff45;
@@ -118,9 +153,9 @@ h2{
     text-align:center;
     margin-bottom:12px;
     font-size:13px;
+    word-wrap:break-word;
 }
 
-/* LABEL */
 label{
     display:block;
     font-weight:600;
@@ -129,7 +164,6 @@ label{
     margin-top:12px;
 }
 
-/* INPUT */
 input, textarea{
     width:100%;
     padding:12px 14px;
@@ -141,26 +175,22 @@ input, textarea{
     font-size:14px;
     background:rgba(0,0,0,.45);
     color:#fff;
-    box-shadow:inset 0 0 15px rgba(255,255,255,.04);
 }
 
-input::placeholder,
-textarea::placeholder{
-    color:#6f6f6f;
+textarea{
+    resize:vertical;
+    min-height:90px;
 }
 
-input:focus, textarea:focus{
+input:focus,
+textarea:focus{
     border-color:rgba(223,255,69,.6);
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
-textarea{
-    resize:none;
-    height:90px;
-}
-
 input[type="file"]{
     height:auto;
+    font-size:13px;
 }
 
 /* IMAGE */
@@ -169,14 +199,14 @@ input[type="file"]{
     margin:10px auto 15px auto;
     width:130px;
     height:130px;
+    max-width:100%;
     border-radius:16px;
     border:3px solid #dfff45;
     object-fit:cover;
-    box-shadow:0 0 22px rgba(223,255,69,.35);
 }
 
 /* BUTTON */
-button{
+button[type="submit"]{
     width:100%;
     padding:15px;
     margin-top:12px;
@@ -186,14 +216,7 @@ button{
     border-radius:25px;
     font-weight:800;
     cursor:pointer;
-    transition:.3s;
     font-size:15px;
-    box-shadow:0 0 20px rgba(211,255,65,.25);
-}
-
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 25px rgba(211,255,65,.65);
 }
 
 /* BACK LINK */
@@ -212,25 +235,49 @@ button:hover{
 }
 
 /* MOBILE */
-@media(max-width:500px){
+@media(max-width:600px){
     .header{
-        flex-direction:column;
-        align-items:flex-start;
+        width:calc(100% - 24px);
+        margin:12px auto;
+        padding:14px 16px;
+        border-radius:22px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .menu-toggle{
+        display:block;
     }
 
     .nav-links{
+        display:none;
         width:100%;
-        justify-content:center;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
     }
 
     .nav-links a{
         width:100%;
         text-align:center;
+        font-size:13px;
+        padding:10px;
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:12px;
     }
 
     .container{
-        padding:25px 20px;
-        border-radius:28px;
+        padding:25px 16px;
+        border-radius:26px;
     }
 
     h2{
@@ -239,6 +286,21 @@ button:hover{
 
     input, textarea, button{
         font-size:13px;
+    }
+
+    .preview-img{
+        width:110px;
+        height:110px;
+    }
+}
+
+@media(max-width:360px){
+    .container{
+        padding:22px 13px;
+    }
+
+    h2{
+        font-size:20px;
     }
 }
 </style>
@@ -249,15 +311,20 @@ button:hover{
 <div class="header">
     <div class="logo">SmartCart Admin</div>
 
-    <div class="nav-links">
-        <a href="/admin/dashboard">Dashboard</a>
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/admin-dashboard">Dashboard</a>
         <a href="/admin/item-list">Products</a>
         <a href="/admin-logout">Logout</a>
     </div>
 </div>
 
 <div class="main">
-
 <div class="container">
 
 <h2>Update Product</h2>
@@ -283,7 +350,7 @@ button:hover{
     <input type="number" step="0.01" name="price" value="{{ product.price }}" required>
 
     <label>Current Image</label>
-    <img src="/static/uploads/product_images/{{ product.image }}" class="preview-img">
+    <img src="/static/uploads/product_images/{{ product.image }}" class="preview-img" alt="{{ product.name }}">
 
     <label>Upload New Image (Optional)</label>
     <input type="file" name="image" accept="image/*">
@@ -295,8 +362,13 @@ button:hover{
 <a href="/admin/item-list" class="back-link">← Back to Product List</a>
 
 </div>
-
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

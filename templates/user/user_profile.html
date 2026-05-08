@@ -13,6 +13,11 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
     display:flex;
@@ -23,18 +28,33 @@ body{
 
 /* NAVBAR */
 .navbar{
+    width:100%;
     background:#050805;
     padding:16px 20px;
     display:flex;
     justify-content:space-between;
     align-items:center;
     flex-wrap:wrap;
+    gap:14px;
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:800;
+    font-size:24px;
+    font-weight:900;
+    color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
 }
 
 .nav-links{
@@ -46,13 +66,15 @@ body{
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 14px;
+    padding:9px 15px;
     border-radius:20px;
     font-size:14px;
     font-weight:700;
+    transition:.3s ease;
 }
 
-.nav-links a:hover{
+.nav-links a:hover,
+.nav-links a.active{
     background:#dfff45;
     color:#111;
 }
@@ -60,24 +82,23 @@ body{
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
+    padding:24px 16px;
 }
 
 /* PROFILE CARD */
 .profile-card{
     width:100%;
-    max-width:400px;
-    padding:30px;
+    max-width:430px;
+    padding:32px 28px;
     border-radius:30px;
     text-align:center;
-
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
       linear-gradient(180deg,#081300,#020302);
-
     box-shadow:0 25px 55px rgba(0,0,0,.45);
     position:relative;
     overflow:hidden;
@@ -90,6 +111,7 @@ body{
     background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
     background-size:9px 9px;
     opacity:.08;
+    pointer-events:none;
 }
 
 .profile-card > *{
@@ -99,45 +121,49 @@ body{
 
 /* PROFILE IMAGE */
 .profile-card img{
-    width:90px;
-    height:90px;
+    width:96px;
+    height:96px;
     border-radius:50%;
     object-fit:cover;
-    margin-bottom:10px;
+    margin-bottom:12px;
     border:2px solid #dfff45;
+    background:rgba(255,255,255,.08);
 }
 
 /* DEFAULT AVATAR */
 .default-avatar{
-    width:90px;
-    height:90px;
+    width:96px;
+    height:96px;
     border-radius:50%;
     background:#dfff45;
     color:#111;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:35px;
-    font-weight:bold;
-    margin:0 auto 10px;
+    font-size:38px;
+    font-weight:900;
+    margin:0 auto 12px;
 }
 
 /* TITLE */
 .profile-card h3{
-    margin-bottom:15px;
-    color:#fff;
+    margin-bottom:16px;
+    color:#dfff45;
+    font-size:22px;
+    word-break:break-word;
 }
 
 /* INPUT */
 .profile-card input{
     width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:12px;
+    padding:13px;
+    margin-top:11px;
+    border-radius:13px;
     border:1px solid rgba(255,255,255,.2);
     background:rgba(0,0,0,.4);
     color:#fff;
     outline:none;
+    font-size:14px;
 }
 
 .profile-card input::placeholder{
@@ -149,17 +175,35 @@ body{
     box-shadow:0 0 10px rgba(223,255,69,.3);
 }
 
+/* FILE INPUT */
+.profile-card input[type="file"]{
+    cursor:pointer;
+}
+
+.profile-card input[type="file"]::file-selector-button{
+    border:none;
+    padding:8px 12px;
+    border-radius:18px;
+    background:#dfff45;
+    color:#111;
+    font-weight:800;
+    cursor:pointer;
+    margin-right:10px;
+}
+
 /* BUTTON */
 .profile-card button{
-    margin-top:16px;
-    padding:12px;
+    margin-top:18px;
+    padding:13px;
     width:100%;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     border:none;
     border-radius:25px;
     cursor:pointer;
-    font-weight:800;
+    font-weight:900;
+    font-size:15px;
+    transition:.3s ease;
 }
 
 .profile-card button:hover{
@@ -168,12 +212,15 @@ body{
 
 /* FLASH */
 .flash{
-    margin-bottom:10px;
-    padding:10px;
-    border-radius:10px;
+    margin-bottom:12px;
+    padding:11px;
+    border-radius:12px;
     background:rgba(223,255,69,.12);
     color:#dfff45;
+    border:1px solid rgba(223,255,69,.25);
     font-size:13px;
+    font-weight:700;
+    word-break:break-word;
 }
 
 /* FOOTER */
@@ -181,27 +228,95 @@ body{
     background:#050805;
     color:#aaa;
     text-align:center;
-    padding:14px;
+    padding:14px 10px;
+    font-size:13px;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
+/* MOBILE MENU */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
     }
 
     .nav-links{
+        display:none;
         width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
     }
 
     .nav-links a{
         width:100%;
         text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:20px 12px;
     }
 
     .profile-card{
-        padding:25px 20px;
+        padding:28px 22px;
+        border-radius:26px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .profile-card{
+        padding:24px 18px;
+        border-radius:22px;
+    }
+
+    .profile-card img,
+    .default-avatar{
+        width:86px;
+        height:86px;
+    }
+
+    .default-avatar{
+        font-size:34px;
+    }
+
+    .profile-card h3{
+        font-size:20px;
+    }
+
+    .profile-card input{
+        padding:12px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+    .logo{
+        font-size:20px;
+    }
+
+    .profile-card{
+        padding:20px 14px;
+    }
+
+    .profile-card input[type="file"]::file-selector-button{
+        width:100%;
+        margin-bottom:8px;
     }
 }
 </style>
@@ -212,11 +327,13 @@ body{
 <div class="navbar">
     <div class="logo">SmartCart</div>
 
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
         <a href="/user-dashboard">Dashboard</a>
         <a href="/user/products">Products</a>
         <a href="/user/cart">Cart</a>
-        <a href="/user/profile">Profile</a>
+        <a href="/user/profile" class="active">Profile</a>
         <a href="/user-logout">Logout</a>
     </div>
 </div>
@@ -234,7 +351,7 @@ body{
 {% endwith %}
 
 {% if user.profile_image %}
-    <img src="{{ url_for('static', filename='uploads/user_profiles/' + user.profile_image) }}">
+    <img src="{{ url_for('static', filename='uploads/user_profiles/' + user.profile_image) }}" alt="Profile Image">
 {% else %}
     <div class="default-avatar">
         {{ user.name[0]|upper }}
@@ -264,6 +381,12 @@ body{
 <div class="footer">
     © 2026 SmartCart
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>

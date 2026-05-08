@@ -13,17 +13,25 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
+    width:100%;
     min-height:100vh;
     display:flex;
     flex-direction:column;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
+    overflow-x:hidden;
 }
 
 /* HEADER */
 .header{
-    margin:18px;
+    width:calc(100% - 36px);
+    margin:18px auto;
     padding:16px 24px;
     border-radius:28px;
     background:
@@ -33,8 +41,8 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    flex-wrap:wrap;
     gap:12px;
+    position:relative;
 }
 
 .logo{
@@ -42,12 +50,37 @@ body{
     font-weight:900;
     color:#dfff45;
     letter-spacing:.5px;
+    white-space:nowrap;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    box-shadow:none;
+    margin:0;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
 }
 
 .nav-links{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .nav-links a{
@@ -60,6 +93,7 @@ body{
     background:rgba(255,255,255,.08);
     border:1px solid rgba(223,255,69,.18);
     transition:.3s;
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
@@ -71,6 +105,7 @@ body{
 /* MAIN */
 .main{
     flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -107,7 +142,6 @@ body{
     z-index:2;
 }
 
-/* TITLE */
 h2{
     text-align:center;
     margin-bottom:22px;
@@ -116,7 +150,6 @@ h2{
     font-weight:900;
 }
 
-/* LABEL */
 label{
     display:block;
     color:#e7e7e7;
@@ -126,9 +159,9 @@ label{
     margin-bottom:6px;
 }
 
-/* INPUT */
 input, textarea{
     width:100%;
+    max-width:100%;
     padding:13px 14px;
     border-radius:13px;
     border:1px solid rgba(255,255,255,.18);
@@ -151,17 +184,17 @@ textarea:focus{
 }
 
 textarea{
-    resize:none;
-    height:95px;
+    resize:vertical;
+    min-height:95px;
 }
 
 input[type="file"]{
     padding:10px;
     color:#aaa;
+    font-size:13px;
 }
 
-/* BUTTON */
-button{
+button[type="submit"]{
     width:100%;
     padding:15px;
     margin-top:22px;
@@ -176,12 +209,11 @@ button{
     box-shadow:0 0 20px rgba(211,255,65,.25);
 }
 
-button:hover{
+button[type="submit"]:hover{
     transform:translateY(-2px);
     box-shadow:0 0 28px rgba(211,255,65,.7);
 }
 
-/* FLASH */
 .flash{
     background:rgba(223,255,69,.12);
     color:#dfff45;
@@ -194,9 +226,9 @@ button:hover{
     font-weight:700;
 }
 
-/* FOOTER */
 .footer{
-    margin:18px;
+    width:calc(100% - 36px);
+    margin:18px auto;
     padding:13px;
     border-radius:24px;
     text-align:center;
@@ -207,35 +239,96 @@ button:hover{
     font-weight:700;
 }
 
-/* RESPONSIVE */
+/* TABLET */
 @media(max-width:768px){
     .header{
-        flex-direction:column;
-        text-align:center;
+        padding:16px;
     }
 
-    .nav-links{
-        justify-content:center;
+    .main{
+        align-items:flex-start;
+        padding:18px;
     }
 
     .container{
         padding:28px 22px;
+        border-radius:28px;
     }
 }
 
-@media(max-width:480px){
+/* MOBILE */
+@media(max-width:600px){
     .header{
-        margin:12px;
+        width:calc(100% - 24px);
+        margin:12px auto;
+        border-radius:22px;
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        font-size:13px;
+        padding:11px;
+    }
+
+    .main{
+        padding:12px;
+    }
+
+    .container{
+        padding:24px 16px;
         border-radius:24px;
     }
 
     h2{
-        font-size:22px;
+        font-size:21px;
+        line-height:1.3;
     }
 
-    .nav-links a{
-        flex:1 1 100%;
-        text-align:center;
+    input, textarea, button{
+        font-size:14px;
+    }
+
+    .footer{
+        width:calc(100% - 24px);
+        margin:12px auto;
+        font-size:12px;
+    }
+}
+
+/* VERY SMALL MOBILE */
+@media(max-width:360px){
+    .container{
+        padding:22px 13px;
+    }
+
+    h2{
+        font-size:19px;
+    }
+
+    input, textarea{
+        padding:12px;
     }
 }
 </style>
@@ -246,7 +339,13 @@ button:hover{
 <div class="header">
     <div class="logo">SmartCart</div>
 
-    <div class="nav-links">
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
         <a href="/admin-dashboard">Dashboard</a>
         <a href="/admin/item-list">Products</a>
         <a href="/admin-logout">Logout</a>
@@ -254,44 +353,48 @@ button:hover{
 </div>
 
 <div class="main">
+    <div class="container">
 
-<div class="container">
+        <h2>➕ Add New Product</h2>
 
-<h2>➕ Add New Product</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <p class="flash">{{ message }}</p>
+          {% endfor %}
+        {% endwith %}
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% for category, message in messages %}
-    <p class="flash">{{ message }}</p>
-  {% endfor %}
-{% endwith %}
+        <form method="POST" enctype="multipart/form-data">
 
-<form method="POST" enctype="multipart/form-data">
+            <label>Product Name</label>
+            <input type="text" name="name" placeholder="Enter product name" required>
 
-    <label>Product Name</label>
-    <input type="text" name="name" placeholder="Enter product name" required>
+            <label>Description</label>
+            <textarea name="description" placeholder="Enter description" required></textarea>
 
-    <label>Description</label>
-    <textarea name="description" placeholder="Enter description" required></textarea>
+            <label>Category</label>
+            <input type="text" name="category" placeholder="Electronics, Fashion..." required>
 
-    <label>Category</label>
-    <input type="text" name="category" placeholder="Electronics, Fashion..." required>
+            <label>Price</label>
+            <input type="number" name="price" step="0.01" placeholder="Enter price" required>
 
-    <label>Price</label>
-    <input type="number" name="price" step="0.01" placeholder="Enter price" required>
+            <label>Image</label>
+            <input type="file" name="image" accept="image/*" required>
 
-    <label>Image</label>
-    <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Add Product</button>
+        </form>
 
-    <button type="submit">Add Product</button>
-</form>
-
-</div>
-
+    </div>
 </div>
 
 <div class="footer">
     © 2025 SmartCart Admin Panel
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

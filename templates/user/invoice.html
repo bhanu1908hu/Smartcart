@@ -1,270 +1,168 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Invoice</title>
+<meta charset="UTF-8">
+<title>Invoice</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', Arial, sans-serif;
-}
+<style>
 
 body{
-    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
-    padding:20px;
-    color:#fff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 20px;
 }
 
 .invoice-box{
-    width:100%;
-    max-width:800px;
-    margin:auto;
-    padding:30px;
-    border-radius:30px;
-    background:
-      radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
-      linear-gradient(180deg,#081300,#020302);
-    box-shadow:0 25px 55px rgba(0,0,0,.45);
-    position:relative;
-    overflow:hidden;
-}
-
-.invoice-box::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-image:radial-gradient(rgba(211,255,65,.25) 1px, transparent 1px);
-    background-size:9px 9px;
-    opacity:.08;
-    pointer-events:none;
-}
-
-.invoice-box > *{
-    position:relative;
-    z-index:2;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 20px;
 }
 
 .header{
-    text-align:center;
-    border-bottom:1px solid rgba(255,255,255,.15);
-    padding-bottom:18px;
-    margin-bottom:20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .header h2{
-    margin-bottom:8px;
-    color:#dfff45;
-    font-size:28px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-.header p{
-    font-size:14px;
-    color:#aaa;
+.section{
+    margin-top: 20px;
 }
 
-h3{
-    margin-top:22px;
-    color:#dfff45;
-    font-size:17px;
+.section h3{
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 p{
-    font-size:14px;
-    color:#ddd;
-    line-height:1.6;
-}
-
-.section-box{
-    background:rgba(0,0,0,.45);
-    border:1px solid rgba(255,255,255,.12);
-    padding:14px;
-    border-radius:14px;
-    margin-top:10px;
+    margin: 5px 0;
+    line-height: 1.5;
 }
 
 table{
-    width:100%;
-    margin-top:12px;
-    border-collapse:collapse;
-    overflow-x:auto;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-th,
-td{
-    border:1px solid rgba(255,255,255,.12);
-    padding:12px;
-    font-size:14px;
-    text-align:center;
-    color:#ddd;
+table, th, td{
+    border: 1px solid #000;
 }
 
 th{
-    background:#111;
-    color:#dfff45;
-    font-weight:800;
+    background-color: #f2f2f2;
+    font-size: 14px;
+    padding: 10px;
+}
+
+td{
+    font-size: 13px;
+    padding: 10px;
+    text-align: center;
 }
 
 .total{
-    text-align:right;
-    margin-top:18px;
-    font-size:20px;
-    font-weight:800;
-    color:#dfff45;
+    margin-top: 20px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.print-btn{
-    margin-top:22px;
-    display:inline-block;
-    padding:12px 18px;
-    background:linear-gradient(90deg,#e6ff45,#c9ff22);
-    color:#111;
-    text-decoration:none;
-    border-radius:25px;
-    font-size:14px;
-    font-weight:800;
-}
-
-.print-btn:hover{
-    box-shadow:0 0 20px rgba(211,255,65,.5);
-}
-
-@media(max-width:600px){
-    body{
-        padding:12px;
-    }
-
-    .invoice-box{
-        padding:20px;
-        border-radius:24px;
-    }
-
-    .header h2{
-        font-size:22px;
-    }
-
-    th,
-    td{
-        font-size:12px;
-        padding:8px;
-    }
-
-    .total{
-        font-size:16px;
-    }
-}
-
-@media print{
-    body{
-        background:white;
-        padding:0;
-        color:#111;
-    }
-
-    .invoice-box{
-        box-shadow:none;
-        border:none;
-        background:white;
-        color:#111;
-    }
-
-    .invoice-box::before{
-        display:none;
-    }
-
-    .header h2,
-    h3,
-    .total{
-        color:#111;
-    }
-
-    .header p,
-    p,
-    td{
-        color:#111;
-    }
-
-    th{
-        background:#f0f0f0;
-        color:#111;
-    }
-
-    .section-box{
-        background:#fafafa;
-        border:1px solid #ddd;
-    }
-
-    .print-btn{
-        display:none;
-    }
-}
-    </style>
+</style>
 </head>
 
 <body>
 
-    <div class="invoice-box">
+<div class="invoice-box">
 
-        <div class="header">
-            <h2>SmartCart Invoice</h2>
-            <p><strong>Order ID:</strong> {{ order.order_id }}</p>
-            <p><strong>Date:</strong> {{ order.created_at }}</p>
-        </div>
+    <div class="header">
+        <h2>SmartCart Invoice</h2>
 
+        <p>
+            <strong>Order ID:</strong>
+            {{ order.order_id }}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            {{ order.created_at }}
+        </p>
+    </div>
+
+    <div class="section">
         <h3>Customer Details</h3>
-        <div class="section-box">
-            <p><strong>User ID:</strong> {{ order.user_id }}</p>
-        </div>
 
+        <p>
+            <strong>User ID:</strong>
+            {{ order.user_id }}
+        </p>
+    </div>
+
+    <div class="section">
         <h3>Delivery Address</h3>
-        <div class="section-box">
-            {% if address %}
-            <p><strong>Name:</strong> {{ address.full_name }}</p>
-            <p><strong>Phone:</strong> {{ address.phone }}</p>
-            <p>
-                <strong>Address:</strong>
-                {{ address.address }},
-                {{ address.city }},
-                {{ address.state }} -
-                {{ address.pincode }}
-            </p>
-            {% else %}
-            <p>Address not found</p>
-            {% endif %}
-        </div>
 
+        {% if address %}
+
+        <p>
+            <strong>Name:</strong>
+            {{ address.full_name }}
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            {{ address.phone }}
+        </p>
+
+        <p>
+            <strong>Address:</strong>
+            {{ address.address }},
+            {{ address.city }},
+            {{ address.state }} -
+            {{ address.pincode }}
+        </p>
+
+        {% else %}
+
+        <p>Address not found</p>
+
+        {% endif %}
+    </div>
+
+    <div class="section">
         <h3>Items Purchased</h3>
 
         <table>
+
             <tr>
                 <th>Product</th>
                 <th>Qty</th>
                 <th>Price (₹)</th>
                 <th>Total (₹)</th>
             </tr>
+
             {% for item in items %}
+
             <tr>
                 <td>{{ item.product_name }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>₹{{ item.price }}</td>
                 <td>₹{{ item.total }}</td>
             </tr>
+
             {% endfor %}
+
         </table>
-
-        <div class="total">
-            Grand Total: ₹{{ order.amount }}
-        </div>
-
-        <a href="javascript:window.print()" class="print-btn">Print Invoice</a>
-
     </div>
 
-</body>
+    <div class="total">
+        Grand Total: ₹{{ order.amount }}
+    </div>
 
+</div>
+
+</body>
 </html>

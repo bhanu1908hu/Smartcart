@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Payment - SmartCart</title>
 
 <style>
@@ -13,17 +14,81 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
-    color:#fff;
+html,body{
+    width:100%;
     overflow-x:hidden;
 }
 
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#dfff45;
+    font-size:24px;
+    font-weight:900;
+}
+
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.nav-links a:hover{
+    background:#dfff45;
+    color:#111;
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:24px 16px;
+}
+
+/* WRAPPER */
 .payment-wrapper{
     width:100%;
     display:flex;
@@ -31,10 +96,11 @@ body{
     align-items:center;
 }
 
+/* CARD */
 .payment-card{
     width:100%;
-    max-width:380px;
-    padding:35px 30px;
+    max-width:420px;
+    padding:36px 30px;
     border-radius:32px;
     text-align:center;
     background:
@@ -61,35 +127,36 @@ body{
 }
 
 .payment-icon{
-    font-size:45px;
-    margin-bottom:12px;
+    font-size:50px;
+    margin-bottom:14px;
 }
 
 .payment-card h2{
-    margin-bottom:22px;
+    margin-bottom:24px;
     color:#fff;
-    font-size:24px;
-    font-weight:800;
+    font-size:clamp(22px,5vw,28px);
+    font-weight:900;
 }
 
 .amount-box{
     background:rgba(0,0,0,.45);
     border:1px solid rgba(255,255,255,.12);
-    padding:18px;
-    border-radius:16px;
-    margin-bottom:25px;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:26px;
 }
 
 .amount-box p{
     font-size:14px;
     color:#aaa;
-    margin-bottom:6px;
+    margin-bottom:8px;
 }
 
 .amount-box h3{
-    font-size:28px;
+    font-size:32px;
     margin:0;
     color:#dfff45;
+    word-break:break-word;
 }
 
 #rzp-button{
@@ -99,10 +166,10 @@ body{
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     font-size:15px;
-    font-weight:800;
+    font-weight:900;
     border-radius:25px;
     cursor:pointer;
-    transition:.3s;
+    transition:.3s ease;
     box-shadow:0 0 20px rgba(211,255,65,.25);
 }
 
@@ -113,34 +180,122 @@ body{
 
 .back-btn{
     display:block;
-    margin-top:18px;
+    margin-top:20px;
     text-decoration:none;
     color:#fff;
     font-size:14px;
-    font-weight:700;
+    font-weight:800;
+    transition:.3s ease;
 }
 
 .back-btn:hover{
     color:#dfff45;
 }
 
-@media(max-width:480px){
+/* MOBILE MENU */
+@media(max-width:768px){
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:22px 12px;
+    }
+
     .payment-card{
-        padding:25px 20px;
+        padding:30px 24px;
         border-radius:28px;
     }
 
+    .amount-box h3{
+        font-size:28px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .main{
+        padding:18px 10px;
+    }
+
+    .payment-card{
+        padding:24px 18px;
+        border-radius:24px;
+    }
+
+    .payment-icon{
+        font-size:44px;
+    }
+
     .payment-card h2{
-        font-size:21px;
+        margin-bottom:20px;
+    }
+
+    .amount-box{
+        padding:16px;
+        border-radius:16px;
     }
 
     .amount-box h3{
-        font-size:23px;
+        font-size:24px;
     }
 
     #rzp-button{
         font-size:14px;
-        padding:13px;
+        padding:14px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+    .logo{
+        font-size:20px;
+    }
+
+    .payment-card{
+        padding:20px 15px;
+    }
+
+    .payment-icon{
+        font-size:40px;
+    }
+
+    .amount-box h3{
+        font-size:22px;
+    }
+
+    #rzp-button{
+        font-size:13px;
     }
 }
 </style>
@@ -148,11 +303,27 @@ body{
 
 <body>
 
+<div class="navbar">
+    <div class="logo">SmartCart</div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/my-orders">My Orders</a>
+    </div>
+</div>
+
+<div class="main">
+
 <div class="payment-wrapper">
 
     <div class="payment-card">
 
         <div class="payment-icon">💳</div>
+
         <h2>Complete Your Payment</h2>
 
         <div class="amount-box">
@@ -160,17 +331,27 @@ body{
             <h3>₹{{ amount }}</h3>
         </div>
 
-        <button type="button" id="rzp-button">Pay Now</button>
+        <button type="button" id="rzp-button">
+            Pay Now
+        </button>
 
-        <a href="/user/cart" class="back-btn">Back to Cart</a>
+        <a href="/user/cart" class="back-btn">
+            Back to Cart
+        </a>
 
     </div>
+
+</div>
 
 </div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+
 document.getElementById("rzp-button").onclick = function(e){
 
     var options = {
@@ -193,7 +374,7 @@ document.getElementById("rzp-button").onclick = function(e){
                 razorpay_signature: response.razorpay_signature
             };
 
-            for (var key in fields) {
+            for (var key in fields){
                 var input = document.createElement("input");
                 input.type = "hidden";
                 input.name = key;

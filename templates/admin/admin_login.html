@@ -13,14 +13,103 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
+    width:100%;
     min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    position:relative;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    color:#dfff45;
+    letter-spacing:.5px;
+    white-space:nowrap;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+    box-shadow:none;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+
+.nav-links a{
+    text-decoration:none;
+    padding:9px 15px;
+    border-radius:20px;
+    color:#fff;
+    font-weight:700;
+    font-size:14px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.18);
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.nav-links a:hover{
+    color:#111;
+    background:#dfff45;
+    box-shadow:0 0 18px rgba(223,255,69,.55);
+}
+
+/* MAIN */
+.main{
+    flex:1;
+    width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:15px;
-    background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
-    color:#fff;
+    padding:22px 15px;
 }
 
 /* CARD */
@@ -53,7 +142,6 @@ body{
     z-index:2;
 }
 
-/* TITLE */
 h2{
     text-align:center;
     margin-bottom:24px;
@@ -62,7 +150,6 @@ h2{
     font-weight:800;
 }
 
-/* LABEL */
 label{
     display:block;
     color:#e7e7e7;
@@ -71,7 +158,6 @@ label{
     margin-bottom:6px;
 }
 
-/* INPUT */
 input{
     width:100%;
     height:48px;
@@ -95,8 +181,7 @@ input:focus{
     box-shadow:0 0 14px rgba(223,255,69,.25);
 }
 
-/* BUTTON */
-button{
+button[type="submit"]{
     width:100%;
     padding:15px;
     margin-top:8px;
@@ -111,12 +196,11 @@ button{
     box-shadow:0 0 20px rgba(211,255,65,.25);
 }
 
-button:hover{
+button[type="submit"]:hover{
     transform:translateY(-2px);
     box-shadow:0 0 25px rgba(211,255,65,.65);
 }
 
-/* FLASH */
 .flash-message{
     background:rgba(223,255,69,.12);
     color:#dfff45;
@@ -126,14 +210,19 @@ button:hover{
     text-align:center;
     margin-bottom:12px;
     font-size:13px;
+    word-wrap:break-word;
 }
 
-/* LINKS */
 .links{
     text-align:center;
     margin-top:18px;
     color:#aaa;
     font-size:13px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:7px;
 }
 
 .links a{
@@ -147,10 +236,65 @@ button:hover{
     color:#dfff45;
 }
 
-/* RESPONSIVE */
-@media(max-width:480px){
+/* TABLET */
+@media(max-width:768px){
+    .header{
+        padding:16px;
+    }
+
+    .main{
+        align-items:flex-start;
+        padding:22px 15px;
+    }
+
     .container{
-        padding:25px 20px;
+        margin-top:20px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .header{
+        width:calc(100% - 24px);
+        margin:12px auto;
+        border-radius:22px;
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        font-size:13px;
+        padding:11px;
+    }
+
+    .main{
+        padding:15px 12px;
+    }
+
+    .container{
+        margin-top:18px;
+        padding:25px 18px;
         border-radius:28px;
     }
 
@@ -163,9 +307,30 @@ button:hover{
         font-size:13px;
     }
 
-    button{
+    button[type="submit"]{
         padding:13px;
         font-size:14px;
+    }
+}
+
+/* VERY SMALL MOBILE */
+@media(max-width:360px){
+    .container{
+        padding:22px 14px;
+        border-radius:24px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    .links{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .links span{
+        display:none;
     }
 }
 </style>
@@ -173,34 +338,59 @@ button:hover{
 </head>
 <body>
 
-<div class="container">
+<div class="header">
+    <div class="logo">SmartCart</div>
 
-<h2>🔐 Admin Login</h2>
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% for category, message in messages %}
-    <p class="flash-message">{{ message }}</p>
-  {% endfor %}
-{% endwith %}
-
-<form method="POST" action="/admin-login">
-
-    <label>Email</label>
-    <input type="email" name="email" placeholder="Enter email" required>
-
-    <label>Password</label>
-    <input type="password" name="password" placeholder="Enter password" required>
-
-    <button type="submit">Login</button>
-
-</form>
-
-<div class="links">
-    <a href="/admin/forgot-password">Forgot Password?</a> |
-    <a href="/admin-signup">Register</a>
+    <div class="nav-links" id="navLinks">
+        <a href="/">Admin Signup</a>
+        <a href="/admin-login">Login</a>
+        <a href="/user-login">User Login</a>
+    </div>
 </div>
 
+<div class="main">
+    <div class="container">
+
+        <h2>🔐 Admin Login</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <p class="flash-message">{{ message }}</p>
+          {% endfor %}
+        {% endwith %}
+
+        <form method="POST" action="/admin-login">
+
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="links">
+            <a href="/admin/forgot-password">Forgot Password?</a>
+            <span>|</span>
+            <a href="/admin-signup">Register</a>
+        </div>
+
+    </div>
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

@@ -13,21 +13,32 @@
     font-family:'Segoe UI',sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
+    min-height:100vh;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
 }
 
 /* NAVBAR */
 .navbar{
-    background:#050805;
-    padding:16px 18px;
+    width:calc(100% - 36px);
+    margin:18px auto;
+    padding:16px 24px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:12px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(223,255,69,.14), transparent 30%),
+      linear-gradient(180deg,#081300,#020302 85%);
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
     flex-wrap:wrap;
-    gap:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 /* LOGO */
@@ -36,11 +47,13 @@ body{
     align-items:center;
     gap:10px;
     color:white;
+    min-width:0;
 }
 
 .logo-icon{
     width:40px;
     height:40px;
+    min-width:40px;
     border-radius:50%;
     background:rgba(223,255,69,.12);
     border:1px solid rgba(223,255,69,.25);
@@ -52,11 +65,34 @@ body{
 
 .logo h1{
     font-size:22px;
-    font-weight:800;
+    font-weight:900;
+    white-space:nowrap;
 }
 
 .logo span{
     color:#dfff45;
+}
+
+/* 3 LINE MENU */
+.menu-toggle{
+    display:none;
+    width:44px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:rgba(223,255,69,.13);
+    cursor:pointer;
+    padding:8px;
+    margin:0;
+}
+
+.menu-toggle span{
+    display:block;
+    width:100%;
+    height:3px;
+    background:#dfff45;
+    border-radius:10px;
+    margin:5px 0;
 }
 
 /* NAV */
@@ -64,16 +100,20 @@ body{
     display:flex;
     gap:8px;
     flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
 .nav-links a{
     text-decoration:none;
     color:#ccc;
-    padding:8px 12px;
+    padding:9px 13px;
     border-radius:20px;
     font-size:13px;
-    font-weight:600;
+    font-weight:700;
     transition:.3s;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(223,255,69,.16);
+    white-space:nowrap;
 }
 
 .nav-links a:hover{
@@ -83,9 +123,10 @@ body{
 
 /* MAIN */
 .container{
+    width:100%;
     max-width:1200px;
-    margin:25px auto;
-    padding:0 15px;
+    margin:0 auto;
+    padding:12px 18px;
 }
 
 /* HEADER CARD */
@@ -122,10 +163,13 @@ body{
     font-size:24px;
     margin-bottom:5px;
     color:#fff;
+    word-break:break-word;
 }
 
 .header-card p{
     color:#aaa;
+    font-size:14px;
+    line-height:1.5;
 }
 
 /* STATS */
@@ -153,6 +197,7 @@ body{
     font-size:20px;
     font-weight:800;
     color:#dfff45;
+    word-break:break-word;
 }
 
 /* TABLE CARD */
@@ -168,7 +213,9 @@ body{
 
 /* SCROLL */
 .table-wrap{
+    width:100%;
     overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
 /* TABLE */
@@ -186,6 +233,7 @@ th{
     color:#dfff45;
     position:sticky;
     top:0;
+    white-space:nowrap;
 }
 
 td{
@@ -193,6 +241,7 @@ td{
     border-bottom:1px solid rgba(255,255,255,.1);
     font-size:13px;
     color:#ddd;
+    vertical-align:middle;
 }
 
 tr:hover{
@@ -201,10 +250,12 @@ tr:hover{
 
 /* BADGES */
 .badge{
+    display:inline-block;
     padding:5px 10px;
     border-radius:20px;
     font-size:12px;
     font-weight:700;
+    white-space:nowrap;
 }
 
 .payment,
@@ -216,6 +267,7 @@ tr:hover{
 
 /* BUTTON */
 .btn{
+    display:inline-block;
     padding:7px 12px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
@@ -223,6 +275,7 @@ tr:hover{
     border-radius:20px;
     font-size:12px;
     font-weight:800;
+    white-space:nowrap;
 }
 
 .btn:hover{
@@ -231,48 +284,100 @@ tr:hover{
 
 /* FOOTER */
 .footer{
+    width:100%;
     text-align:center;
-    padding:18px;
+    padding:18px 10px;
     color:#444;
+    font-size:13px;
+    font-weight:700;
 }
 
 /* MOBILE */
-@media(max-width:768px){
+@media(max-width:600px){
     .navbar{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .nav-links{
-        width:100%;
-        justify-content:center;
-    }
-
-    .nav-links a{
-        flex:1 1 45%;
-        text-align:center;
-    }
-
-    .header-card h2{
-        font-size:20px;
-    }
-
-    table{
-        min-width:700px;
-    }
-}
-
-@media(max-width:480px){
-    .nav-links a{
-        flex:1 1 100%;
+        width:calc(100% - 24px);
+        margin:12px auto;
+        padding:14px 16px;
+        border-radius:22px;
     }
 
     .logo h1{
         font-size:20px;
     }
 
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        grid-template-columns:1fr;
+        gap:8px;
+        padding-top:12px;
+    }
+
+    .nav-links.active{
+        display:grid;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        font-size:13px;
+        padding:10px;
+    }
+
+    .container{
+        padding:8px 12px;
+    }
+
+    .header-card{
+        padding:18px 14px;
+        border-radius:22px;
+    }
+
+    .header-card h2{
+        font-size:20px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
     .stat-box p{
         font-size:18px;
+    }
+
+    .table-card{
+        border-radius:22px;
+    }
+
+    table{
+        min-width:720px;
+    }
+
+    th,td{
+        padding:10px;
+        font-size:12px;
+    }
+
+    .footer{
+        font-size:12px;
+    }
+}
+
+@media(max-width:360px){
+    .logo h1{
+        font-size:18px;
+    }
+
+    .header-card h2{
+        font-size:18px;
+    }
+
+    .header-card{
+        padding:16px 12px;
     }
 }
 </style>
@@ -287,7 +392,13 @@ tr:hover{
         <h1>Smart<span>Cart</span></h1>
     </div>
 
-    <div class="nav-links">
+    <button class="menu-toggle" onclick="toggleMenu()" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
         <a href="/admin-dashboard">Dashboard</a>
         <a href="/admin/add-item">Add Product</a>
         <a href="/admin/item-list">Products</a>
@@ -359,6 +470,12 @@ tr:hover{
     </div>
 
 </div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>

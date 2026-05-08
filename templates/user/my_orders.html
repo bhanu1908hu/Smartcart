@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Orders</title>
+<meta charset="UTF-8">
+<title>My Orders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
+<style>
 *{
     box-sizing:border-box;
     margin:0;
@@ -13,31 +13,98 @@
     font-family:'Segoe UI', Arial, sans-serif;
 }
 
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     min-height:100vh;
-    padding:20px;
     background:linear-gradient(135deg,#ecf4c9,#cbd8b6);
     color:#fff;
+    display:flex;
+    flex-direction:column;
 }
 
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:#050805;
+    padding:16px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#dfff45;
+    font-size:24px;
+    font-weight:900;
+}
+
+.menu-toggle{
+    display:none;
+    color:#dfff45;
+    font-size:30px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.nav-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ccc;
+    padding:9px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:800;
+    transition:.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    background:#dfff45;
+    color:#111;
+}
+
+/* PAGE */
+.page{
+    flex:1;
+    width:100%;
+    padding:22px 16px;
+}
+
+/* CONTAINER */
 .container{
     width:100%;
-    max-width:1000px;
-    margin:auto;
+    max-width:1050px;
+    margin:0 auto;
 }
 
+/* TITLE */
 h2{
     text-align:center;
-    margin-bottom:22px;
+    margin-bottom:24px;
     color:#111;
-    font-size:26px;
-    font-weight:800;
+    font-size:clamp(22px,5vw,28px);
+    font-weight:900;
 }
 
 /* EMPTY STATE */
 .empty{
     text-align:center;
-    padding:30px;
+    padding:32px 20px;
     border-radius:28px;
     background:
       radial-gradient(circle at top, rgba(223,255,69,.15), transparent 40%),
@@ -47,17 +114,19 @@ h2{
 
 .empty p{
     color:#ddd;
+    font-size:15px;
+    line-height:1.6;
 }
 
 .empty a{
     display:inline-block;
-    margin-top:14px;
-    padding:12px 18px;
+    margin-top:16px;
+    padding:12px 20px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     text-decoration:none;
     border-radius:25px;
-    font-weight:800;
+    font-weight:900;
 }
 
 /* ORDERS GRID */
@@ -69,6 +138,7 @@ h2{
 
 /* ORDER CARD */
 .order-card{
+    width:100%;
     padding:22px;
     border-radius:24px;
     background:
@@ -95,37 +165,44 @@ h2{
 }
 
 .order-card h3{
-    margin-bottom:12px;
+    margin-bottom:14px;
     color:#dfff45;
     font-size:18px;
+    word-break:break-word;
 }
 
+/* ORDER INFO */
 .order-info{
     line-height:1.7;
     font-size:14px;
     color:#ddd;
 }
 
+.order-info p{
+    margin-bottom:5px;
+    word-break:break-word;
+}
+
 .order-info strong{
     color:#fff;
 }
 
-/* STATUS BADGE */
+/* STATUS */
 .status{
     display:inline-block;
-    padding:5px 10px;
+    padding:5px 11px;
     border-radius:20px;
     font-size:12px;
     background:rgba(223,255,69,.12);
     color:#dfff45;
     border:1px solid rgba(223,255,69,.25);
     margin-top:5px;
-    font-weight:700;
+    font-weight:800;
 }
 
 /* BUTTONS */
 .btn-group{
-    margin-top:15px;
+    margin-top:16px;
     display:flex;
     gap:8px;
     flex-wrap:wrap;
@@ -133,14 +210,16 @@ h2{
 
 .view-btn{
     flex:1;
-    padding:10px 12px;
+    min-width:120px;
+    padding:11px 13px;
     background:linear-gradient(90deg,#e6ff45,#c9ff22);
     color:#111;
     text-decoration:none;
     border-radius:25px;
     font-size:13px;
     text-align:center;
-    font-weight:800;
+    font-weight:900;
+    transition:.3s ease;
 }
 
 .download{
@@ -158,14 +237,74 @@ h2{
     color:#111;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-    body{
-        padding:15px;
+/* FOOTER */
+.footer{
+    background:#050805;
+    color:#aaa;
+    text-align:center;
+    padding:14px 10px;
+    font-size:13px;
+}
+
+/* MOBILE MENU */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
     }
 
-    h2{
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.08);
+        padding:12px;
+        border-radius:18px;
+        margin-top:8px;
+        border:1px solid rgba(223,255,69,.15);
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+        background:rgba(255,255,255,.06);
+    }
+
+    .orders{
+        grid-template-columns:1fr;
+    }
+
+    .page{
+        padding:18px 12px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+    .navbar{
+        padding:14px 12px;
+    }
+
+    .logo{
         font-size:22px;
+    }
+
+    .page{
+        padding:14px 10px;
+    }
+
+    .order-card,
+    .empty{
+        border-radius:22px;
+    }
+
+    .order-card{
+        padding:20px;
     }
 
     .btn-group{
@@ -176,10 +315,53 @@ h2{
         width:100%;
     }
 }
-    </style>
+
+/* SMALL MOBILE */
+@media(max-width:360px){
+
+    .logo{
+        font-size:20px;
+    }
+
+    .order-card{
+        padding:17px;
+    }
+
+    .order-card h3{
+        font-size:16px;
+    }
+
+    .order-info{
+        font-size:13px;
+    }
+
+    .view-btn{
+        font-size:12px;
+        padding:10px;
+    }
+}
+</style>
 </head>
 
 <body>
+
+<div class="navbar">
+
+    <div class="logo">SmartCart</div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/user-dashboard">Dashboard</a>
+        <a href="/user/products">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/my-orders" class="active">My Orders</a>
+        <a href="/user/profile">Profile</a>
+    </div>
+
+</div>
+
+<div class="page">
 
 <div class="container">
 
@@ -189,7 +371,10 @@ h2{
 
         <div class="empty">
             <p>You have not placed any orders yet.</p>
-            <a href="/user/products">Start Shopping</a>
+
+            <a href="/user/products">
+                Start Shopping
+            </a>
         </div>
 
     {% else %}
@@ -197,34 +382,53 @@ h2{
         <div class="orders">
 
         {% for order in orders %}
+
         <div class="order-card">
 
             <h3>Order #{{ order.order_id }}</h3>
 
             <div class="order-info">
-                <p><strong>Amount:</strong> ₹{{ order.amount }}</p>
+
+                <p>
+                    <strong>Amount:</strong>
+                    ₹{{ order.amount }}
+                </p>
 
                 <p>
                     <strong>Status:</strong>
-                    <span class="status">{{ order.payment_status }}</span>
+
+                    <span class="status">
+                        {{ order.payment_status }}
+                    </span>
                 </p>
 
-                <p><strong>Date:</strong> {{ order.created_at }}</p>
+                <p>
+                    <strong>Date:</strong>
+                    {{ order.created_at }}
+                </p>
+
             </div>
 
             <div class="btn-group">
 
-                <a href="/user/order-success/{{ order.order_id }}" class="view-btn">
+                <a href="/user/order-success/{{ order.order_id }}"
+                   class="view-btn">
+
                     View Details
+
                 </a>
 
-                <a href="/user/download-invoice/{{ order.order_id }}" class="view-btn download">
+                <a href="/user/download-invoice/{{ order.order_id }}"
+                   class="view-btn download">
+
                     Invoice
+
                 </a>
 
             </div>
 
         </div>
+
         {% endfor %}
 
         </div>
@@ -232,6 +436,18 @@ h2{
     {% endif %}
 
 </div>
+
+</div>
+
+<div class="footer">
+    © 2026 SmartCart | All Rights Reserved
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("show");
+}
+</script>
 
 </body>
 </html>
